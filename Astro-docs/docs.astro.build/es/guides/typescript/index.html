@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr" data-has-toc data-has-sidebar data-theme="dark" class="astro-db5uw6gc">
+	<head>
+		<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>TypeScript | Docs</title><link rel="canonical" href="https://docs.astro.build/es/guides/typescript/"/><link rel="alternate" hreflang="en" href="https://docs.astro.build/en/guides/typescript/"/><link rel="alternate" hreflang="de" href="https://docs.astro.build/de/guides/typescript/"/><link rel="alternate" hreflang="pt-BR" href="https://docs.astro.build/pt-br/guides/typescript/"/><link rel="alternate" hreflang="es" href="https://docs.astro.build/es/guides/typescript/"/><link rel="alternate" hreflang="zh-CN" href="https://docs.astro.build/zh-cn/guides/typescript/"/><link rel="alternate" hreflang="zh-TW" href="https://docs.astro.build/zh-tw/guides/typescript/"/><link rel="alternate" hreflang="fr" href="https://docs.astro.build/fr/guides/typescript/"/><link rel="alternate" hreflang="hi" href="https://docs.astro.build/hi/guides/typescript/"/><link rel="alternate" hreflang="ar" href="https://docs.astro.build/ar/guides/typescript/"/><link rel="alternate" hreflang="ja" href="https://docs.astro.build/ja/guides/typescript/"/><link rel="alternate" hreflang="ko" href="https://docs.astro.build/ko/guides/typescript/"/><link rel="alternate" hreflang="pl" href="https://docs.astro.build/pl/guides/typescript/"/><link rel="alternate" hreflang="ru" href="https://docs.astro.build/ru/guides/typescript/"/><link rel="alternate" hreflang="it" href="https://docs.astro.build/it/guides/typescript/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="icon" href="/favicon.ico" sizes="32x32"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v4.15.3"/><meta name="generator" content="Starlight v0.26.4"/><meta property="og:title" content="TypeScript"/><meta property="og:type" content="article"/><meta property="og:url" content="https://docs.astro.build/es/guides/typescript/"/><meta property="og:locale" content="es"/><meta property="og:description" content="Aprende a usar TypeScript incorporado en Astro."/><meta property="og:site_name" content="Docs"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Aprende a usar TypeScript incorporado en Astro."/>
+<meta property="og:image" content="https://docs.astro.build/open-graph/es/guides/typescript.webp">
+<meta name="twitter:image" content="https://docs.astro.build/open-graph/es/guides/typescript.webp">
+
+<!-- Algolia docsearch language facet -->
+<meta name="docsearch:language" content="es">
+<meta name="twitter:site" content="astrodotbuild">
+
+<!-- Fathom analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="EZBHTSIG" data-canonical="true" defer></script>
+		
+		
+<script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script>
+
+<template id="theme-icons">
+	<svg aria-hidden="true" class="light astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg>
+	<svg aria-hidden="true" class="dark astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg>
+	<svg aria-hidden="true" class="auto astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>
+</template>
+	<link rel="stylesheet" href="/_astro/index.nLVTq4ne.css">
+<style>.action:where(.astro-vnzlvqnm){gap:.5em;align-items:center;border-radius:999rem;padding:.5rem 1.125rem;color:var(--sl-color-white);line-height:1.1875;text-decoration:none;font-size:var(--sl-text-sm)}.action:where(.astro-vnzlvqnm).primary,.action:where(.astro-vnzlvqnm).primary:hover{background:var(--sl-color-text-accent);color:var(--sl-color-black)}.action:where(.astro-vnzlvqnm).secondary{background:var(--sl-color-black);border:2px solid}.action:where(.astro-vnzlvqnm).minimal{padding-inline:0}@media (min-width: 50rem){.action:where(.astro-vnzlvqnm){font-size:var(--sl-text-base);padding:1rem 1.25rem}}
+:root{--sl-badge-default-border: var(--sl-color-accent);--sl-badge-default-bg: var(--sl-color-accent-low);--sl-badge-default-text: #fff;--sl-badge-note-border: var(--sl-color-blue);--sl-badge-note-bg: var(--sl-color-blue-low);--sl-badge-note-text: #fff;--sl-badge-danger-border: var(--sl-color-red);--sl-badge-danger-bg: var(--sl-color-red-low);--sl-badge-danger-text: #fff;--sl-badge-success-border: var(--sl-color-green);--sl-badge-success-bg: var(--sl-color-green-low);--sl-badge-success-text: #fff;--sl-badge-caution-border: var(--sl-color-orange);--sl-badge-caution-bg: var(--sl-color-orange-low);--sl-badge-caution-text: #fff;--sl-badge-tip-border: var(--sl-color-purple);--sl-badge-tip-bg: var(--sl-color-purple-low);--sl-badge-tip-text: #fff}[data-theme=light]:root{--sl-badge-default-bg: var(--sl-color-accent-high);--sl-badge-note-bg: var(--sl-color-blue-high);--sl-badge-danger-bg: var(--sl-color-red-high);--sl-badge-success-bg: var(--sl-color-green-high);--sl-badge-caution-bg: var(--sl-color-orange-high);--sl-badge-tip-bg: var(--sl-color-purple-high)}.sl-badge:where(.astro-d5txobf6){display:inline-block;border:1px solid var(--sl-color-border-badge);border-radius:.25rem;font-family:var(--sl-font-system-mono);line-height:normal;color:var(--sl-color-text-badge);background-color:var(--sl-color-bg-badge);overflow-wrap:anywhere}.sidebar-content .sl-badge:where(.astro-d5txobf6){line-height:1;font-size:var(--sl-text-xs);padding:.125rem .375rem}.sidebar-content a[aria-current=page]>.sl-badge:where(.astro-d5txobf6){--sl-color-bg-badge: transparent;--sl-color-border-badge: currentColor;color:inherit}.default:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-default-bg);--sl-color-border-badge: var(--sl-badge-default-border);--sl-color-text-badge: var(--sl-badge-default-text)}.note:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-note-bg);--sl-color-border-badge: var(--sl-badge-note-border);--sl-color-text-badge: var(--sl-badge-note-text)}.danger:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-danger-bg);--sl-color-border-badge: var(--sl-badge-danger-border);--sl-color-text-badge: var(--sl-badge-danger-text)}.success:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-success-bg);--sl-color-border-badge: var(--sl-badge-success-border);--sl-color-text-badge: var(--sl-badge-success-text)}.tip:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-tip-bg);--sl-color-border-badge: var(--sl-badge-tip-border);--sl-color-text-badge: var(--sl-badge-tip-text)}.caution:where(.astro-d5txobf6){--sl-color-bg-badge: var(--sl-badge-caution-bg);--sl-color-border-badge: var(--sl-badge-caution-border);--sl-color-text-badge: var(--sl-badge-caution-text)}.small:where(.astro-d5txobf6){font-size:var(--sl-text-xs);padding:.125rem .25rem}.medium:where(.astro-d5txobf6){font-size:var(--sl-text-sm);padding:.175rem .35rem}.large:where(.astro-d5txobf6){font-size:var(--sl-text-base);padding:.225rem .45rem}.sl-markdown-content :is(h1,h2,h3,h4,h5,h6) .sl-badge:where(.astro-d5txobf6){vertical-align:middle}
+.card-grid:where(.astro-kuesxhl6){display:grid;gap:1rem}.card-grid:where(.astro-kuesxhl6)>*{margin-top:0!important}@media (min-width: 50rem){.card-grid:where(.astro-kuesxhl6){grid-template-columns:1fr 1fr;gap:1.5rem}.stagger:where(.astro-kuesxhl6){--stagger-height: 5rem;padding-bottom:var(--stagger-height)}.stagger:where(.astro-kuesxhl6)>*:nth-child(2n){transform:translateY(var(--stagger-height))}}
+.card:where(.astro-a63fiz5g){--sl-card-border: var(--sl-color-purple);--sl-card-bg: var(--sl-color-purple-low);border:1px solid var(--sl-color-gray-5);background-color:var(--sl-color-black);padding:clamp(1rem,calc(.125rem + 3vw),2.5rem);flex-direction:column;gap:clamp(.5rem,calc(.125rem + 1vw),1rem)}.card:where(.astro-a63fiz5g):nth-child(4n+1){--sl-card-border: var(--sl-color-orange);--sl-card-bg: var(--sl-color-orange-low)}.card:where(.astro-a63fiz5g):nth-child(4n+3){--sl-card-border: var(--sl-color-green);--sl-card-bg: var(--sl-color-green-low)}.card:where(.astro-a63fiz5g):nth-child(4n+4){--sl-card-border: var(--sl-color-red);--sl-card-bg: var(--sl-color-red-low)}.card:where(.astro-a63fiz5g):nth-child(4n+5){--sl-card-border: var(--sl-color-blue);--sl-card-bg: var(--sl-color-blue-low)}.title:where(.astro-a63fiz5g){font-weight:600;font-size:var(--sl-text-h4);color:var(--sl-color-white);line-height:var(--sl-line-height-headings);gap:1rem;align-items:center}.card:where(.astro-a63fiz5g) .icon:where(.astro-a63fiz5g){border:1px solid var(--sl-card-border);background-color:var(--sl-card-bg);padding:.2em;border-radius:.25rem}.card:where(.astro-a63fiz5g) .body:where(.astro-a63fiz5g){margin:0;font-size:clamp(var(--sl-text-sm),calc(.5rem + 1vw),var(--sl-text-body))}
+svg:where(.astro-27agt67y){color:var(--sl-icon-color);font-size:var(--sl-icon-size, 1em);width:1em;height:1em}
+.card:where(.astro-har75nup){position:relative;margin:-.75rem;padding:.75rem;display:grid;grid-template-columns:auto 1fr;gap:.5rem;align-items:center;border-radius:.5rem}.card--minimal:where(.astro-har75nup){grid-template-columns:1fr;justify-items:center;text-align:center}.card:where(.astro-har75nup):hover,.card:where(.astro-har75nup):focus-within{background-color:var(--sl-color-gray-6);outline:1px solid var(--sl-color-text-accent)}@media (forced-colors: active){.card:where(.astro-har75nup):hover,.card:where(.astro-har75nup):focus-within{outline:1px solid LinkText}}.stack:where(.astro-har75nup){flex-direction:column;gap:.5rem}h3:where(.astro-har75nup){line-height:var(--sl-line-height-headings);font-size:var(--sl-text-lg);font-weight:600}.card--minimal:where(.astro-har75nup) h3:where(.astro-har75nup){font-size:var(--sl-text-body)}a:where(.astro-har75nup){text-decoration:none;color:var(--sl-color-white)}a:where(.astro-har75nup):focus{outline:none}a:where(.astro-har75nup):before{content:"";position:absolute;inset:0}
+.fluid-grid:where(.astro-oxk5cgh7){--column-min-width: 13rem;text-align:start;margin-block:.5rem;padding-inline-start:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--column-min-width),1fr));grid-template-columns:repeat(auto-fill,minmax(min(var(--column-min-width),100%),1fr));gap:1.5rem 2rem;list-style:none;align-items:start}@media (min-width: 37.75em){.fluid-grid:where(.astro-oxk5cgh7){gap:2rem}}.fluid-grid--minimal:where(.astro-oxk5cgh7){--column-min-width: 8rem;gap:1.5rem .75rem}
+starlight-tabs:where(.astro-z3poiwev){display:block}.tablist-wrapper:where(.astro-z3poiwev){overflow-x:auto}:where(.astro-z3poiwev)[role=tablist]{display:flex;list-style:none;border-bottom:2px solid var(--sl-color-gray-5);padding:0}.tab:where(.astro-z3poiwev){margin-bottom:-2px}.tab:where(.astro-z3poiwev)>:where(.astro-z3poiwev)[role=tab]{display:flex;align-items:center;gap:.5rem;padding:0 1.25rem;text-decoration:none;border-bottom:2px solid var(--sl-color-gray-5);color:var(--sl-color-gray-3);outline-offset:var(--sl-outline-offset-inside);overflow-wrap:initial}.tab:where(.astro-z3poiwev) :where(.astro-z3poiwev)[role=tab][aria-selected=true]{color:var(--sl-color-white);border-color:var(--sl-color-text-accent);font-weight:600}.tablist-wrapper:where(.astro-z3poiwev)~[role=tabpanel]{margin-top:1rem}
+.logo:where(.astro-anndpidy){display:flex;place-content:center;font-size:var(--logo-size);width:1em;height:1em;background-color:#17181c;border:1px solid hsl(224,10%,23%);outline:1px solid transparent;overflow:hidden}.circle:where(.astro-anndpidy){border-radius:50%}.rounded:where(.astro-anndpidy){border-radius:.125em}.logo:where(.astro-anndpidy) img:where(.astro-anndpidy){padding:var(--logo-padding);width:100%;height:100%}
+.sl-link-card:where(.astro-ms6abgrv){display:grid;grid-template-columns:1fr auto;gap:.5rem;border:1px solid var(--sl-color-gray-5);border-radius:.5rem;padding:1rem;box-shadow:var(--sl-shadow-sm);position:relative}a:where(.astro-ms6abgrv){text-decoration:none;line-height:var(--sl-line-height-headings)}a:where(.astro-ms6abgrv):before{content:"";position:absolute;inset:0}.stack:where(.astro-ms6abgrv){flex-direction:column;gap:.5rem}.title:where(.astro-ms6abgrv){color:var(--sl-color-white);font-weight:600;font-size:var(--sl-text-lg)}.description:where(.astro-ms6abgrv){color:var(--sl-color-gray-3);line-height:1.5}.icon:where(.astro-ms6abgrv){color:var(--sl-color-gray-3)}.sl-link-card:where(.astro-ms6abgrv):hover{background:var(--sl-color-gray-7, var(--sl-color-gray-6));border-color:var(--sl-color-gray-2)}.sl-link-card:where(.astro-ms6abgrv):hover .icon:where(.astro-ms6abgrv){color:var(--sl-color-white)}
+.description:where(.astro-kq5jy4fu){color:var(--sl-color-gray-2);font-size:var(--sl-text-body-sm)}.tags:where(.astro-kq5jy4fu){gap:.5rem}
+.neutral-badge{border-color:var(--sl-color-gray-5);background-color:var(--sl-color-gray-6);color:var(--sl-color-text)}
+.sl-steps{--bullet-size: calc(var(--sl-line-height) * 1rem);--bullet-margin: .375rem;list-style:none;counter-reset:steps-counter var(--sl-steps-start, 0);padding-inline-start:0}.sl-steps>li{counter-increment:steps-counter;position:relative;padding-inline-start:calc(var(--bullet-size) + 1rem);padding-bottom:1px;min-height:calc(var(--bullet-size) + var(--bullet-margin))}.sl-steps>li+li{margin-top:0}.sl-steps>li:before{content:counter(steps-counter);position:absolute;top:0;inset-inline-start:0;width:var(--bullet-size);height:var(--bullet-size);line-height:var(--bullet-size);font-size:var(--sl-text-xs);font-weight:600;text-align:center;color:var(--sl-color-white);background-color:var(--sl-color-gray-6);border-radius:99rem;box-shadow:inset 0 0 0 1px var(--sl-color-gray-5)}.sl-steps>li:after{--guide-width: 1px;content:"";position:absolute;top:calc(var(--bullet-size) + var(--bullet-margin));bottom:var(--bullet-margin);inset-inline-start:calc((var(--bullet-size) - var(--guide-width)) / 2);width:var(--guide-width);background-color:var(--sl-color-hairline-light)}.sl-steps>li>:first-child{--lh: calc(1em * var(--sl-line-height));--shift-y: calc(.5 * (var(--bullet-size) - var(--lh)));transform:translateY(var(--shift-y));margin-bottom:var(--shift-y)}.sl-steps>li>:first-child:where(h1,h2,h3,h4,h5,h6){--lh: calc(1em * var(--sl-line-height-headings))}@supports (--prop: 1lh){.sl-steps>li>:first-child{--lh: 1lh}}
+.integrations-nav:where(.astro-hu7fe7u2) .scope{font-weight:400;color:var(--sl-color-text)}
+starlight-file-tree:where(.astro-ofdnxnnj){--x-space: 1.5rem;--y-space: .125rem;--y-pad: 0;display:block;border:1px solid var(--sl-color-gray-5);padding:1rem;background-color:var(--sl-color-gray-6);font-size:var(--sl-text-xs);font-family:var(--__sl-font-mono);overflow-x:auto}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details{border:0;padding:0;padding-inline-start:var(--x-space);background:transparent}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary{margin-inline-start:calc(-1 * var(--x-space));border:0;padding:var(--y-pad) .625rem;font-weight:400;color:var(--sl-color-white);max-width:100%}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary::marker,starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary::-webkit-details-marker{color:var(--sl-color-gray-3)}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary:hover,starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary:hover .tree-icon{cursor:pointer;color:var(--sl-color-text-accent);fill:var(--sl-color-text-accent)}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary:hover~ul{border-color:var(--sl-color-gray-4)}starlight-file-tree:where(.astro-ofdnxnnj) .directory>details>summary:hover .highlight .tree-icon{fill:var(--sl-color-text-invert)}starlight-file-tree:where(.astro-ofdnxnnj) ul{margin-inline-start:.5rem;border-inline-start:1px solid var(--sl-color-gray-5);padding:0;padding-inline-start:.125rem;list-style:none}starlight-file-tree:where(.astro-ofdnxnnj)>ul{margin:0;border:0;padding:0}starlight-file-tree:where(.astro-ofdnxnnj) li{margin:var(--y-space) 0;padding:var(--y-pad) 0}starlight-file-tree:where(.astro-ofdnxnnj) .file{margin-inline-start:calc(var(--x-space) - .125rem);color:var(--sl-color-white)}starlight-file-tree:where(.astro-ofdnxnnj) .tree-entry{display:inline-flex;align-items:flex-start;flex-wrap:wrap;max-width:calc(100% - 1rem)}@media (min-width: 30em){starlight-file-tree:where(.astro-ofdnxnnj) .tree-entry{flex-wrap:nowrap}}starlight-file-tree:where(.astro-ofdnxnnj) .tree-entry>:first-child{flex-shrink:0}starlight-file-tree:where(.astro-ofdnxnnj) .empty{color:var(--sl-color-gray-3);padding-inline-start:.375rem}starlight-file-tree:where(.astro-ofdnxnnj) .comment{color:var(--sl-color-gray-3);padding-inline-start:1.625rem;max-width:24rem;min-width:12rem}starlight-file-tree:where(.astro-ofdnxnnj) .highlight{display:inline-block;border-radius:.25rem;padding-inline-end:.5rem;color:var(--sl-color-text-invert);background-color:var(--sl-color-text-accent)}starlight-file-tree:where(.astro-ofdnxnnj) svg{display:inline;fill:var(--sl-color-gray-3);vertical-align:middle;margin-inline:.25rem .375rem;width:.875rem;height:.875rem}starlight-file-tree:where(.astro-ofdnxnnj) .highlight svg.tree-icon{fill:var(--sl-color-text-invert)}
+</style><script type="module" src="/_astro/page.7qqag-5g.js"></script><style>.read-more:where(.astro-szj46hnz){display:flex;gap:.5rem;align-items:flex-start}.icon:where(.astro-szj46hnz){--icon-size: 1.5rem;font-size:var(--icon-size);flex-shrink:0;margin-block:calc((var(--sl-line-height) * 1rem - var(--icon-size)) / 2);color:var(--sl-color-text-accent)}
+</style></head>
+	<body class="astro-db5uw6gc">
+		<a href="#_top" class="astro-jnfk3tcw">Saltearse al contenido</a>
+		<div class="page sl-flex astro-locgyneq">
+	<header class="header astro-locgyneq"><div class="header sl-flex astro-2h5j4poh">
+	<div class="title-wrapper sl-flex astro-2h5j4poh">
+		<span class="site-title sl-flex astro-oijwx5iz">
+	<a class="astro-logo astro-oijwx5iz" href="https://astro.build/" aria-label="Astro"><svg xmlns="http://www.w3.org/2000/svg" width="106" height="32" viewBox="0 -6 381 100">
+  <path class="flame" fill="currentColor" d="M25.8 85.2c-4.5-4.2-5.9-12.8-4-19.1 3.3 4 7.8 5.2 12.5 6 7.2 1 14.3.6 21-2.7l2.4-1.4c.6 1.8.8 3.7.5 5.6-.5 4.5-2.8 8-6.4 10.7-1.4 1.1-3 2-4.5 3-4.6 3.2-5.8 6.8-4 12.1v.6a12 12 0 0 1-5.3-4.6 13 13 0 0 1-2-7c0-1.2 0-2.5-.2-3.7-.4-3-1.8-4.3-4.5-4.4a5.2 5.2 0 0 0-5.4 4.2l-.1.7Z"/>
+  <path fill="currentColor" d="M0 65s13.4-6.5 26.8-6.5l10.1-31.3c.4-1.5 1.5-2.5 2.7-2.5 1.3 0 2.4 1 2.8 2.5l10 31.3c16 0 26.9 6.5 26.9 6.5L56.5 3c-.6-1.8-1.7-3-3.2-3H26c-1.5 0-2.5 1.2-3.2 3L0 65Zm141-19.9c0 5.5-6.8 8.8-16.2 8.8-6.2 0-8.3-1.5-8.3-4.7 0-3.4 2.6-5 8.8-5 5.5 0 10.3 0 15.7.8v.1Zm.1-6.8a71 71 0 0 0-14.5-1.2c-17.7 0-26 4.2-26 14 0 10.1 5.7 14 18.8 14 11.2 0 18.8-2.8 21.6-9.8h.4l-.1 4.7c0 3.6.6 3.9 3.5 3.9h13.8c-.8-2.2-1.2-8.2-1.2-13.4l.2-15.4c0-11.5-6.9-18.8-28.5-18.8-9.3 0-19.6 1.6-27.5 4 .8 3.1 1.8 9.4 2.3 13.5a61.4 61.4 0 0 1 24-4.5c10.4 0 13.2 2.3 13.2 7.1v2Zm37.9 10c-1.9.3-4.5.3-7 .3a60 60 0 0 1-7.1-.4l-.1 2c0 9.5 6.2 15 28.1 15 20.6 0 27.3-5.5 27.3-15.1 0-9.2-4.4-13.7-24-14.7-15.2-.6-16.6-2.3-16.6-4.2 0-2.2 2-3.4 12.2-3.4 10.6 0 13.4 1.5 13.4 4.5v.7a153 153 0 0 1 14.1 0v-1.7c0-11.2-9.2-14.9-27.2-14.9-20.3 0-27 5-27 14.6 0 8.7 5.4 14.1 24.8 15 14.3.4 16 2 16 4.2 0 2.4-2.4 3.5-12.5 3.5-11.5 0-14.4-1.6-14.4-5v-.4Zm66-40.1a58.2 58.2 0 0 1-20.8 11.6v10.8h5V47c0 10 5.3 17.7 21.8 17.7 7 0 11.6-.8 17.4-2-.6-3.7-1.3-9.4-1.5-13.8a41 41 0 0 1-12.6 1.8c-6.6 0-9.3-1.8-9.3-7.1V30.8c8.6 0 17.1.2 22.1.4 0-4 .1-9.7.3-13.5l-22.1.2.2-9.7h-.5Zm44.7 20.1.3-10.6h-15.1c.2 6.5.2 13.3.2 23 0 10 0 16.7-.2 23.2H292c-.3-4.6-.3-12.3-.3-18.9 0-10.3 4.2-13.3 13.7-13.3 4.4 0 7.6.5 10.3 1.5.1-3.8.9-11.4 1.3-14.7a34 34 0 0 0-9.8-1.4c-8.2 0-14.2 3.3-17 11.3l-.6-.1Zm75.1 12.2c0 8.3-6 12.2-15.4 12.2S334 49 334 40.5c0-8.6 6-11.8 15.4-11.8 9.3 0 15.4 3.5 15.4 11.8Zm15.7-.4c0-16.5-13-24-31.1-24-18.3 0-30.8 7.5-30.8 24s11.6 25.3 30.7 25.3c19.2 0 31.2-8.8 31.2-25.3Z"/>
+  <defs>
+    <linearGradient id="gradient" x1="21" x2="64.6" y1="100" y2="79.4" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D83333"/>
+      <stop offset="1" stop-color="#F041FF"/>
+    </linearGradient>
+  </defs>
+  <style>
+    [data-theme="dark"] .flame {
+      fill: url(#gradient);
+    }
+  </style>
+</svg>
+</a>
+	<a class="docs-logo astro-oijwx5iz" href="/es/getting-started/" aria-label="Docs"><svg xmlns="http://www.w3.org/2000/svg" width="69" height="28" viewBox="0 -6 246 100">
+	<path fill="currentColor" d="M29 63.8c16.6 0 28.1-9.5 28.1-23.8 0-14.4-10.8-22.3-27.8-22.3H0v46.1h29ZM13.2 26.6h14.2c9.5 0 16 4.6 16 13.6 0 9.3-6 14.7-15.9 14.7H13.1V26.6Zm80.1 38.8c18.8 0 31-9.7 31-24.6 0-15-12.2-24.6-31-24.6-18.7 0-31 9.6-31 24.6 0 14.8 12.3 24.6 31 24.6Zm0-9.8c-10.3 0-17-6-17-14.8 0-9 6.7-14.9 17-14.9s17.1 6 17.1 14.9-6.8 14.8-17.1 14.8Zm66.3 9.8c15 0 25.5-6 29.3-16.4l-13.5-3c-1.9 6.1-7.2 9.4-15.4 9.4-10.4 0-17-5.8-17-14.7 0-9 6.4-14.7 16.8-14.7 8.4 0 13.7 3.4 15.5 9.7l13.6-2.4c-3-10.7-13.9-17.2-28.9-17.2-18.1 0-30.7 10.2-30.7 24.8 0 14.8 11.7 24.4 30.2 24.4Zm60.3 0c16.6 0 26.1-5.7 26.1-15.9 0-8.5-5.2-12.3-18-13.6l-12.7-1.2c-5.9-.7-7.8-1.8-7.8-4.6 0-3.2 3.9-4.8 11-4.8 8.8 0 15.4 2.8 18.9 7.3l8.2-7c-5.7-6.4-14.8-9.4-26.5-9.4-15.7 0-24.6 5.4-24.6 14.5 0 8.5 5.4 12.7 16.7 14l14.1 1.5c5.5.6 7.5 1.7 7.5 4.6 0 3.6-4 5.3-12.3 5.3-9.4 0-16.5-3.6-20.4-9l-9.3 6.5c4.7 7.3 15.4 11.8 29 11.8Z"/>
+</svg>
+</a>
+</span>
+	</div>
+	<div class="sl-flex astro-2h5j4poh">
+		<sl-doc-search data-translations="{&#34;button&#34;:&#34;Buscar&#34;,&#34;placeholder&#34;:&#34;Buscar en la documentación&#34;,&#34;shortcutLabel&#34;:&#34;Presiona / para buscar&#34;,&#34;resultsFooterLede&#34;:&#34;¿Buscas una integración o tema de Astro? ¿Necesitas más ayuda?&#34;,&#34;resultsFooterIntegrations&#34;:&#34;Directorio de integraciones de Astro&#34;,&#34;resultsFooterThemes&#34;:&#34;Galeria de temas de Astro&#34;,&#34;resultsFooterDiscord&#34;:&#34;Únete a nosotros en Discord&#34;,&#34;modal&#34;:{&#34;searchBox&#34;:{&#34;resetButtonTitle&#34;:&#34;Borrar la consulta de búsqueda&#34;,&#34;resetButtonAriaLabel&#34;:&#34;Borrar la consulta de búsqueda&#34;,&#34;cancelButtonText&#34;:&#34;Cancelar&#34;,&#34;cancelButtonAriaLabel&#34;:&#34;Cancelar&#34;},&#34;startScreen&#34;:{&#34;recentSearchesTitle&#34;:&#34;Recientes&#34;,&#34;noRecentSearchesText&#34;:&#34;No hay búsquedas recientes&#34;,&#34;saveRecentSearchButtonTitle&#34;:&#34;Guardar esta búsqueda&#34;,&#34;removeRecentSearchButtonTitle&#34;:&#34;Eliminar esta búsqueda del historial&#34;,&#34;favoriteSearchesTitle&#34;:&#34;Favoritos&#34;,&#34;removeFavoriteSearchButtonTitle&#34;:&#34;Eliminar esta búsqueda de favoritos&#34;},&#34;errorScreen&#34;:{&#34;titleText&#34;:&#34;No se pueden recuperar los resultados&#34;,&#34;helpText&#34;:&#34;Es posible que desees verificar tu conexión de red.&#34;},&#34;footer&#34;:{&#34;selectText&#34;:&#34;para seleccionar&#34;,&#34;selectKeyAriaLabel&#34;:&#34;Tecla de entrada&#34;,&#34;navigateText&#34;:&#34;para navegar&#34;,&#34;navigateUpKeyAriaLabel&#34;:&#34;Flecha hacia arriba&#34;,&#34;navigateDownKeyAriaLabel&#34;:&#34;Flecha hacia abajo&#34;,&#34;closeText&#34;:&#34;para cerrar&#34;,&#34;closeKeyAriaLabel&#34;:&#34;Tecla de escape&#34;,&#34;searchByText&#34;:&#34;Búsqueda por&#34;},&#34;noResultsScreen&#34;:{&#34;noResultsText&#34;:&#34;No hay resultados para&#34;,&#34;suggestedQueryText&#34;:&#34;Intenta buscar&#34;,&#34;reportMissingResultsText&#34;:&#34;¿Crees que esta consulta debería devolver resultados?&#34;,&#34;reportMissingResultsLinkText&#34;:&#34;Háganos saber.&#34;}}}">
+	<button type="button" class="DocSearch DocSearch-Button" aria-label="Buscar">
+		<span class="DocSearch-Button-Container">
+			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
+				<path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+			<span class="DocSearch-Button-Placeholder">Buscar</span>
+		</span>
+		<span class="DocSearch-Button-Keys"></span>
+	</button>
+</sl-doc-search>
+
+<script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.ByHJUbA9.js"></script>
+	</div>
+	<div class="sl-hidden md:sl-flex right-group astro-2h5j4poh">
+		<div class="sl-flex social-icons astro-2h5j4poh">
+			<a href="https://github.com/withastro/astro" rel="me" class="sl-flex astro-243vdyix">
+					<span class="sr-only astro-243vdyix">GitHub</span>
+					<svg aria-hidden="true" class="astro-243vdyix astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg>
+				</a><a href="https://astro.build/chat" rel="me" class="sl-flex astro-243vdyix">
+					<span class="sr-only astro-243vdyix">Discord</span>
+					<svg aria-hidden="true" class="astro-243vdyix astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.78 13.78 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28h-.05A19.74 19.74 0 0 0 3.64 4.4 20.26 20.26 0 0 0 .11 18.09l.02.02a19.9 19.9 0 0 0 6.04 3.03l.04-.02a14.24 14.24 0 0 0 1.23-2.03.08.08 0 0 0-.05-.07 13.1 13.1 0 0 1-1.9-.92.08.08 0 0 1 .02-.1 10.2 10.2 0 0 0 .41-.31h.04a14.2 14.2 0 0 0 12.1 0l.04.01a9.63 9.63 0 0 0 .4.32.08.08 0 0 1-.03.1 12.29 12.29 0 0 1-1.9.91.08.08 0 0 0-.02.1 15.97 15.97 0 0 0 1.27 2.01h.04a19.84 19.84 0 0 0 6.03-3.05v-.03a20.12 20.12 0 0 0-3.57-13.69ZM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.22 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+				</a>
+
+
+		</div>
+		<starlight-theme-select>
+	
+	<label style="--sl-select-width: 6.25em" class="astro-eta4quzz">
+	<span class="sr-only astro-eta4quzz">Seleccionar tema</span>
+	<svg aria-hidden="true" class="icon label-icon astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>
+	<select value="auto" class="astro-eta4quzz">
+		<option value="dark" class="astro-eta4quzz">Oscuro</option><option value="light" class="astro-eta4quzz">Claro</option><option value="auto" selected="true" class="astro-eta4quzz">Automático</option>
+	</select>
+	<svg aria-hidden="true" class="icon caret astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+</label>
+</starlight-theme-select>
+
+
+<script>
+	StarlightThemeProvider.updatePickers();
+</script>
+
+<script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script>
+		<starlight-lang-select>
+			<label style="--sl-select-width: 7em" class="astro-eta4quzz">
+	<span class="sr-only astro-eta4quzz">Seleccionar idioma</span>
+	<svg aria-hidden="true" class="icon label-icon astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg>
+	<select value="/es/guides/typescript/" class="astro-eta4quzz">
+		<option value="/en/guides/typescript/" class="astro-eta4quzz">English</option><option value="/de/guides/typescript/" class="astro-eta4quzz">Deutsch</option><option value="/pt-br/guides/typescript/" class="astro-eta4quzz">Português do Brasil</option><option value="/es/guides/typescript/" selected="true" class="astro-eta4quzz">Español</option><option value="/zh-cn/guides/typescript/" class="astro-eta4quzz">简体中文</option><option value="/zh-tw/guides/typescript/" class="astro-eta4quzz">正體中文</option><option value="/fr/guides/typescript/" class="astro-eta4quzz">Français</option><option value="/hi/guides/typescript/" class="astro-eta4quzz">हिन्दी</option><option value="/ar/guides/typescript/" class="astro-eta4quzz">العربية</option><option value="/ja/guides/typescript/" class="astro-eta4quzz">日本語</option><option value="/ko/guides/typescript/" class="astro-eta4quzz">한국어</option><option value="/pl/guides/typescript/" class="astro-eta4quzz">Polski</option><option value="/ru/guides/typescript/" class="astro-eta4quzz">Русский</option><option value="/it/guides/typescript/" class="astro-eta4quzz">Italiano</option>
+	</select>
+	<svg aria-hidden="true" class="icon caret astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+</label>
+		</starlight-lang-select>
+
+<script type="module">class n extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)})}}customElements.define("starlight-lang-select",n);</script>
+	</div>
+</div></header>
+	<nav class="sidebar astro-locgyneq" aria-label="Primario">
+				<starlight-menu-button class="astro-eerncfn6">
+	<button aria-expanded="false" aria-label="Menú" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-eerncfn6">
+		<svg aria-hidden="true" class="astro-eerncfn6 astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg>
+	</button>
+</starlight-menu-button>
+
+<script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>
+				<div id="starlight__sidebar" class="sidebar-pane astro-locgyneq">
+					<div class="sidebar-content sl-flex astro-locgyneq">
+						<sl-sidebar-state-persist data-hash="0ewuv3o" class="astro-r3j6ex4f">
+	<ul class="top-level astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">¡Hola Mundo!</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/getting-started/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Cómo Empezar</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/install-and-setup/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Instalación y Configuración</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/deploy/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Despliega tu Aplicación</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/migrate-to-astro/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Migra a Astro</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/tutorial/0-introduction/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Tutorial: Construye un Blog</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Conceptos Principales </span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/concepts/why-astro/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">¿Por qué Astro?</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/concepts/islands/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Islas de Astro</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Aprende lo Básico</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/basics/project-structure/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Estructura del proyecto</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/basics/astro-components/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Componentes</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/basics/astro-pages/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Páginas</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/basics/layouts/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Esquemas</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/basics/astro-syntax/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Sintaxis de Plantilla de Astro</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/basics/rendering-modes/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Modos de Renderizado</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/imports/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Importaciones</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/integrations-guide/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Integraciones</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Administra tu Contenido</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/guides/content/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Creación de Contenido</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/markdown-content/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Markdown</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/content-collections/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Colecciones de Contenido</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/cms/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Conectar un CMS</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/rss/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Agregar un feed RSS</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Rutas y Navegación</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/guides/routing/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Enrutamiento</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/endpoints/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Endpoints</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/actions/" class="fallback astro-eqmnmihm" class="fallback">
+						<span class="astro-eqmnmihm">Acciones</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/prefetch/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Precarga</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/middleware/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Middleware</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/internationalization/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Internacionalización</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/view-transitions/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Transiciones de vista</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Recursos</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/guides/styling/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Estilos y CSS</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/images/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Imágenes</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/fonts/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Fuentes</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/media/" class="fallback astro-eqmnmihm" class="fallback">
+						<span class="astro-eqmnmihm">Conectar un medio alojado o un DAM</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Conecta Tus Datos</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/guides/data-fetching/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Obtención de Datos</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/astro-db/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Astro DB</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/backend/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Añade Servicios de Backend</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/ecommerce/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">E-commerce</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/authentication/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Autenticación</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/environment-variables/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Variables de Entorno</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Interactividad del lado del cliente</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/guides/framework-components/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">UI Frameworks</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/client-side-scripts/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Scripts y Manejadores de Eventos</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Mantener Tu Proyecto</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/upgrade-astro/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Actualiza Astro</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/testing/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Pruebas</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/troubleshooting/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Resolución de problemas</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Referencia</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/reference/configuration-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Configuración</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/api-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">API de Tiempo de Ejecución de Astro</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/cli-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">CLI de Astro</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/directives-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Referencia de Directivas</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/components-reference/" class="fallback astro-eqmnmihm" class="fallback">
+						<span class="astro-eqmnmihm">Built-in Components</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/guides/typescript/" aria-current="page" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Referencia de TypeScript</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/error-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Referencia de Errores</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Otras APIs de Desarrollo</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/reference/integrations-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">API de Integraciones</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/adapter-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">API de Adaptadores</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/image-service-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">API de Servicio de Imagen</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/dev-toolbar-app-reference/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">API de Herramientas de desarrollo</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/reference/container-reference/" class="fallback astro-eqmnmihm" class="fallback">
+						<span class="astro-eqmnmihm">API de Contenedor (Experimental)</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li><li class="astro-eqmnmihm">
+				<details open class="astro-eqmnmihm">
+						<summary class="astro-eqmnmihm">
+							<div class="group-label astro-eqmnmihm">
+								<span class="large astro-eqmnmihm">Recursos de la Comunidad</span>
+								
+							</div>
+							<svg aria-hidden="true" class="caret astro-eqmnmihm astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</summary>
+						<ul class="astro-eqmnmihm">
+	<li class="astro-eqmnmihm">
+				<a href="/es/community-resources/content/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Cursos, Guías y Recetas</span>
+						
+					</a>
+			</li><li class="astro-eqmnmihm">
+				<a href="/es/community-resources/talks/" class="astro-eqmnmihm">
+						<span class="astro-eqmnmihm">Charlas, Entrevistas y Transmisiones</span>
+						
+					</a>
+			</li>
+</ul>
+					</details>
+			</li>
+</ul>
+</sl-sidebar-state-persist>
+<div class="md:sl-hidden astro-r3j6ex4f">
+	<div class="sl-flex astro-mkinwl4g">
+	<div dir="ltr" lang="en" class="sponsors astro-kwmzlgva">
+	<h2 class="sponsors-title astro-kwmzlgva">Patrocinado por</h2>
+	<a href="https://www.netlify.com/?utm_campaign=Astro-2024&utm_source=astro-referral" aria-label="Netlify" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" width="96" viewBox="0 0 256 105" aria-hidden="true" class="astro-kwmzlgva">
+			<path fill="#32E6E2" d="M58.5 103.8V77.4l.5-.5h6.6l.6.5v26.4l-.6.5H59l-.5-.5Zm0-76.9V.5L59 0h6.6l.6.5V27l-.6.5H59l-.5-.5ZM35.8 85.2h-1l-4.4-4.5v-.9l8.5-8.5h4.7l.7.6v4.8l-8.5 8.5Zm-5.4-60.5v-.9l4.5-4.5h.9l8.5 8.5v4.8l-.7.6H39l-8.5-8.5ZM.5 48.3H38l.5.6v6.6l-.5.5H.5l-.5-.5v-6.6l.5-.6Zm255 0 .5.6v6.6l-.6.5h-37.8l-.6-.5 2.8-6.6.5-.6h35.1Z" class="astro-kwmzlgva"></path>
+			<path d="M74.7 65.9H68l-.6-.6V50c0-2.7-1-4.9-4.4-5-1.7 0-3.6 0-5.7.2l-.3.3v20l-.6.5H50l-.6-.6V39l.6-.6h14.8c5.7 0 10.4 4.7 10.4 10.5v16.4l-.5.6Zm31.9-11.6-.6.6H89l-.6.5c0 1.1 1.1 4.4 5.5 4.4 1.7 0 3.3-.5 3.9-1.6l.5-.6h6.6l.6.6c-.6 3.3-3.3 8.2-11.6 8.2-9.3 0-13.7-6.6-13.7-14.3S84.6 38 93.4 38s13.2 6.6 13.2 14.2v2.2ZM98.3 49c0-.6-.5-4.4-5-4.4s-4.9 3.8-4.9 4.4l.6.5h8.8l.5-.5Zm23.7 8.7c0 1.1.5 1.7 1.6 1.7h5l.5.5v5.5l-.6.6h-4.9c-5 0-9.3-2.2-9.3-8.3v-12l-.6-.6H110l-.6-.5V39l.6-.6h3.8l.6-.5v-5l.5-.5h6.6l.5.5v5l.6.5h6l.6.6v5.5l-.6.5h-6l-.6.6v12Zm20.3 8.3h-6.6l-.6-.6V28l.6-.6h6.6l.5.6v37.3l-.5.6ZM157 34h-6.6l-.5-.5V28l.5-.6h6.6l.6.6v5.5l-.6.5Zm0 31.9h-6.6l-.5-.6V39l.5-.6h6.6l.6.6v26.3l-.6.6Zm25.8-38v5.6l-.5.5h-5c-1 0-1.6.6-1.6 1.7v2.2l.5.5h5.5l.6.6v5.5l-.6.5h-5.5l-.5.6v19.7l-.6.6h-6.5l-.6-.6V45.5l-.5-.5h-3.9l-.5-.5V39l.5-.6h3.9l.5-.5v-2.2c0-6 4.4-8.3 9.4-8.3h4.9l.5.6Zm20.3 38.5c-2.2 5.5-4.3 8.8-12 8.8h-2.8l-.5-.5v-5.5l.5-.6h2.8c2.7 0 3.3-.5 3.8-2.2V66l-8.8-21.4V39l.6-.6h5l.5.6 6.5 18.7h.6L206 39l.5-.6h5l.5.6v5.5l-8.8 22Z" class="astro-kwmzlgva"></path>
+		</svg>
+	</a>
+	<a href="https://sentry.io/welcome/?utm_medium=partner&utm_source=astro&utm_campaign=astro-docs" aria-label="Sentry" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 44" width="96" aria-hidden="true" class="astro-kwmzlgva">
+			<path d="M29,2.26a4.67,4.67,0,0,0-8,0L14.42,13.53A32.21,32.21,0,0,1,32.17,40.19H27.55A27.68,27.68,0,0,0,12.09,17.47L6,28a15.92,15.92,0,0,1,9.23,12.17H4.62A.76.76,0,0,1,4,39.06l2.94-5a10.74,10.74,0,0,0-3.36-1.9l-2.91,5a4.54,4.54,0,0,0,1.69,6.24A4.66,4.66,0,0,0,4.62,44H19.15a19.4,19.4,0,0,0-8-17.31l2.31-4A23.87,23.87,0,0,1,23.76,44H36.07a35.88,35.88,0,0,0-16.41-31.8l4.67-8a.77.77,0,0,1,1.05-.27c.53.29,20.29,34.77,20.66,35.17a.76.76,0,0,1-.68,1.13H40.6q.09,1.91,0,3.81h4.78A4.59,4.59,0,0,0,50,39.43a4.49,4.49,0,0,0-.62-2.28Z M124.32,28.28,109.56,9.22h-3.68V34.77h3.73V15.19l15.18,19.58h3.26V9.22h-3.73ZM87.15,23.54h13.23V20.22H87.14V12.53h14.93V9.21H83.34V34.77h18.92V31.45H87.14ZM71.59,20.3h0C66.44,19.06,65,18.08,65,15.7c0-2.14,1.89-3.59,4.71-3.59a12.06,12.06,0,0,1,7.07,2.55l2-2.83a14.1,14.1,0,0,0-9-3c-5.06,0-8.59,3-8.59,7.27,0,4.6,3,6.19,8.46,7.52C74.51,24.74,76,25.78,76,28.11s-2,3.77-5.09,3.77a12.34,12.34,0,0,1-8.3-3.26l-2.25,2.69a15.94,15.94,0,0,0,10.42,3.85c5.48,0,9-2.95,9-7.51C79.75,23.79,77.47,21.72,71.59,20.3ZM195.7,9.22l-7.69,12-7.64-12h-4.46L186,24.67V34.78h3.84V24.55L200,9.22Zm-64.63,3.46h8.37v22.1h3.84V12.68h8.37V9.22H131.08ZM169.41,24.8c3.86-1.07,6-3.77,6-7.63,0-4.91-3.59-8-9.38-8H154.67V34.76h3.8V25.58h6.45l6.48,9.2h4.44l-7-9.82Zm-10.95-2.5V12.6h7.17c3.74,0,5.88,1.77,5.88,4.84s-2.29,4.86-5.84,4.86Z" fill="currentColor" class="astro-kwmzlgva"></path>
+		</svg>
+	</a>
+	<a href="https://www.storyblok.com/" aria-label="Storyblok" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251 53" width="114" aria-hidden="true" class="astro-kwmzlgva">
+			<g class="astro-kwmzlgva">
+				<path d="M73 37c-2 0-3.7-.2-5.5-.7-1.6-.6-3.2-1.5-4.5-2.7l2.4-4c1.3 1 2.5 1.6 3.8 2.1 1.2.6 2.4.8 3.6.8a4 4 0 0 0 2-.5c.4-.3.6-.7.6-1.3 0-.5-.2-1-.9-1.4-1-.4-2-.8-3-1L67.7 27a13 13 0 0 1-2.4-1.3c-.6-.4-1.1-1-1.4-1.6a5 5 0 0 1-.4-2c0-2.2.9-4.1 2.5-5.4a9.3 9.3 0 0 1 6.1-2c1.6 0 3.1.2 4.5.6 1.4.5 2.8 1.3 4.1 2.4l-2.6 4c-1-.8-2-1.4-3.2-1.9a7 7 0 0 0-2.8-.6c-.7 0-1.3.1-1.8.5-.5.2-.7.7-.7 1.3 0 .6.2 1 .8 1.4.5.3 1.5.6 3 1l3.8 1.2L80 26c1.3 1 2 2.5 1.8 4.1a6 6 0 0 1-2.4 5.1 10 10 0 0 1-6.4 1.9Zm25.8-1.4-3 1c-1.2.3-2.4.5-3.6.5-.8 0-1.6 0-2.3-.3a4.3 4.3 0 0 1-3.2-2.7c-.3-.8-.5-1.7-.5-2.7V20h-2.7v-4.9h2.7V8.3h6.5v6.8h4.4v5h-4.4v9c0 .7.2 1.2.6 1.6.3.3.8.4 1.3.4s1 0 1.5-.2l1.4-.6 1.2 5.3ZM111 37c-1.6 0-3.3-.3-4.8-.9a10 10 0 0 1-5.9-6 12 12 0 0 1 0-8.5c1-2.8 3.1-5 5.9-6 1.4-.6 3-1 4.8-1a11 11 0 0 1 10.7 7c1.1 2.7 1.1 5.8 0 8.5-1 2.7-3 5-5.8 6-1.5.6-3.2 1-4.9.9Zm-4.7-11c0 1.7.4 3 1.3 4 1 1 2.1 1.6 3.5 1.6 1.3 0 2.5-.6 3.4-1.6a6.4 6.4 0 0 0 1.4-4 6 6 0 0 0-1.4-4.1c-1-1-2-1.6-3.4-1.6-1.3 0-2.6.6-3.4 1.6a6 6 0 0 0-1 1.8c-.3.7-.4 1.5-.4 2.3Zm33.1-5.2c-1.5 0-3 .3-4.3.8a5.2 5.2 0 0 0-2.8 2.2v13h-6.5V15.1h6v4.3a8.4 8.4 0 0 1 2.9-3.4 6.5 6.5 0 0 1 3.6-1.3h1.1v6Zm2.9 19.1c1 .3 1.9.5 2.8.5.8 0 1.4-.2 1.9-.7a9 9 0 0 0 1.2-3L140 15.2h6.7l5 15.9 4.3-15.9h6.2l-8.2 25a8.5 8.5 0 0 1-11.7 5.3V40Zm35.3-2.8a8.1 8.1 0 0 1-7.2-4v3.6h-5.7v-30h6.6v12a8 8 0 0 1 10.8-3c1.1.5 2 1.3 3 2.3a14 14 0 0 1 1.8 12.4c-.5 1.3-1.2 2.6-2 3.5a9.6 9.6 0 0 1-7.3 3.2Zm-1.8-5.5a5 5 0 0 0 4.7-3.4c.8-2 .4-4.4-1-6.2-.8-1-2-1.7-3.4-1.7-1 0-2 .4-2.8 1-.9.8-1.6 1.7-2 2.8v4.5a5 5 0 0 0 4.6 3Zm15-24.8h6.6V29c0 1.7.7 2.5 2.1 2.5a5 5 0 0 0 2.1-.5l1 4.8a15 15 0 0 1-5.9 1.3c-1.9 0-3.3-.5-4.3-1.5s-1.6-2.4-1.6-4.3V6.8Zm24 30.3c-1.6 0-3.2-.3-4.8-.9-2.7-1-4.9-3.3-5.9-6a12 12 0 0 1 2.2-12 11.3 11.3 0 0 1 8.5-3.4 11 11 0 0 1 10.7 6.9c1.6 4.1.8 8.7-2.2 12a10 10 0 0 1-3.6 2.5c-1.6.6-3.2 1-4.9.9ZM210.2 26c0 1.7.4 3 1.3 4 1 1 2.1 1.6 3.5 1.6 1.3 0 2.5-.6 3.4-1.6a6.4 6.4 0 0 0 1.4-4 6 6 0 0 0-1.4-4.1c-1-1-2-1.6-3.4-1.6-1.3 0-2.6.6-3.4 1.6a6 6 0 0 0-1 1.8c-.3.7-.4 1.4-.4 2.3Zm34 10.7-5.6-8.7-2.3 2.4v6.3h-6.6v-30h6.6v17.4l7.2-8.9h7l-7.8 9.3 8.4 12.2h-7Z" class="astro-kwmzlgva"></path>
+				<path fill="#0AB3AF" d="M2.3 0C1 0 0 1 0 2.3v40.6c0 1.2 1 2 2.3 2h6V53l7.4-8H43c1.3 0 2-.8 2-2.1V2.3c0-1.2-.7-2.3-2-2.3H2.3Z" class="astro-kwmzlgva"></path>
+				<path fill="#FFF" d="M29.1 8.1c1 0 2 .2 2.7.7.8.4 1.5 1 2.1 1.6a7.7 7.7 0 0 1 1.8 5 8 8 0 0 1-1 4 6.5 6.5 0 0 1-3.2 2.7c1.7.5 3 1.3 4 2.5a7.8 7.8 0 0 1 1.4 4.8 6.2 6.2 0 0 1-3 5.6c-1 .6-2 1.2-3.3 1.5-1.2.3-2.6.5-4 .5H8.3V8.1h20.8Zm-3 16.2H15.8v4.9h10c.7 0 1.2-.3 1.7-.7.4-.4.6-1 .6-1.7 0-.6-.2-1.2-.5-1.7-.4-.5-.9-.8-1.5-.8Zm-.8-9.8h-9.5V19H25c.5 0 1-.2 1.4-.5.4-.3.6-1 .6-1.8 0-.7-.2-1.3-.5-1.6a2 2 0 0 0-1.3-.5Z" class="astro-kwmzlgva"></path>
+			</g>
+		</svg>
+	</a>
+</div>
+	<div class="mobile-preferences sl-flex astro-dedjtlkp">
+	<div class="sl-flex social-icons astro-dedjtlkp">
+		<a href="https://github.com/withastro/astro" rel="me" class="sl-flex astro-243vdyix">
+					<span class="sr-only astro-243vdyix">GitHub</span>
+					<svg aria-hidden="true" class="astro-243vdyix astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg>
+				</a><a href="https://astro.build/chat" rel="me" class="sl-flex astro-243vdyix">
+					<span class="sr-only astro-243vdyix">Discord</span>
+					<svg aria-hidden="true" class="astro-243vdyix astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.78 13.78 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28h-.05A19.74 19.74 0 0 0 3.64 4.4 20.26 20.26 0 0 0 .11 18.09l.02.02a19.9 19.9 0 0 0 6.04 3.03l.04-.02a14.24 14.24 0 0 0 1.23-2.03.08.08 0 0 0-.05-.07 13.1 13.1 0 0 1-1.9-.92.08.08 0 0 1 .02-.1 10.2 10.2 0 0 0 .41-.31h.04a14.2 14.2 0 0 0 12.1 0l.04.01a9.63 9.63 0 0 0 .4.32.08.08 0 0 1-.03.1 12.29 12.29 0 0 1-1.9.91.08.08 0 0 0-.02.1 15.97 15.97 0 0 0 1.27 2.01h.04a19.84 19.84 0 0 0 6.03-3.05v-.03a20.12 20.12 0 0 0-3.57-13.69ZM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.22 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+				</a>
+
+
+	</div>
+	<starlight-theme-select>
+	
+	<label style="--sl-select-width: 6.25em" class="astro-eta4quzz">
+	<span class="sr-only astro-eta4quzz">Seleccionar tema</span>
+	<svg aria-hidden="true" class="icon label-icon astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>
+	<select value="auto" class="astro-eta4quzz">
+		<option value="dark" class="astro-eta4quzz">Oscuro</option><option value="light" class="astro-eta4quzz">Claro</option><option value="auto" selected="true" class="astro-eta4quzz">Automático</option>
+	</select>
+	<svg aria-hidden="true" class="icon caret astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+</label>
+</starlight-theme-select>
+
+
+<script>
+	StarlightThemeProvider.updatePickers();
+</script>
+
+
+	<starlight-lang-select>
+			<label style="--sl-select-width: 7em" class="astro-eta4quzz">
+	<span class="sr-only astro-eta4quzz">Seleccionar idioma</span>
+	<svg aria-hidden="true" class="icon label-icon astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg>
+	<select value="/es/guides/typescript/" class="astro-eta4quzz">
+		<option value="/en/guides/typescript/" class="astro-eta4quzz">English</option><option value="/de/guides/typescript/" class="astro-eta4quzz">Deutsch</option><option value="/pt-br/guides/typescript/" class="astro-eta4quzz">Português do Brasil</option><option value="/es/guides/typescript/" selected="true" class="astro-eta4quzz">Español</option><option value="/zh-cn/guides/typescript/" class="astro-eta4quzz">简体中文</option><option value="/zh-tw/guides/typescript/" class="astro-eta4quzz">正體中文</option><option value="/fr/guides/typescript/" class="astro-eta4quzz">Français</option><option value="/hi/guides/typescript/" class="astro-eta4quzz">हिन्दी</option><option value="/ar/guides/typescript/" class="astro-eta4quzz">العربية</option><option value="/ja/guides/typescript/" class="astro-eta4quzz">日本語</option><option value="/ko/guides/typescript/" class="astro-eta4quzz">한국어</option><option value="/pl/guides/typescript/" class="astro-eta4quzz">Polski</option><option value="/ru/guides/typescript/" class="astro-eta4quzz">Русский</option><option value="/it/guides/typescript/" class="astro-eta4quzz">Italiano</option>
+	</select>
+	<svg aria-hidden="true" class="icon caret astro-eta4quzz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+</label>
+		</starlight-lang-select>
+
+
+</div>
+</div>
+</div>
+
+
+<script>
+	(() => {
+		try {
+			if (!matchMedia('(min-width: 50em)').matches) return;
+			const scroller = document.getElementById('starlight__sidebar');
+			/** @type {HTMLElement | null} */
+			const target = document.querySelector('sl-sidebar-state-persist');
+			const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+			if (!scroller || !target || !state || target.dataset.hash !== state.hash) return;
+			target
+				.querySelectorAll('details')
+				.forEach((el, idx) => typeof state.open[idx] === 'boolean' && (el.open = state.open[idx]));
+			scroller.scrollTop = state.scroll;
+		} catch {}
+	})();
+</script>
+
+<div class="sl-hidden md:sl-block astro-3x5efdbn">
+	<div dir="ltr" lang="en" class="sponsors astro-kwmzlgva">
+	<h2 class="sponsors-title astro-kwmzlgva">Patrocinado por</h2>
+	<a href="https://www.netlify.com/?utm_campaign=Astro-2024&utm_source=astro-referral" aria-label="Netlify" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" width="96" viewBox="0 0 256 105" aria-hidden="true" class="astro-kwmzlgva">
+			<path fill="#32E6E2" d="M58.5 103.8V77.4l.5-.5h6.6l.6.5v26.4l-.6.5H59l-.5-.5Zm0-76.9V.5L59 0h6.6l.6.5V27l-.6.5H59l-.5-.5ZM35.8 85.2h-1l-4.4-4.5v-.9l8.5-8.5h4.7l.7.6v4.8l-8.5 8.5Zm-5.4-60.5v-.9l4.5-4.5h.9l8.5 8.5v4.8l-.7.6H39l-8.5-8.5ZM.5 48.3H38l.5.6v6.6l-.5.5H.5l-.5-.5v-6.6l.5-.6Zm255 0 .5.6v6.6l-.6.5h-37.8l-.6-.5 2.8-6.6.5-.6h35.1Z" class="astro-kwmzlgva"></path>
+			<path d="M74.7 65.9H68l-.6-.6V50c0-2.7-1-4.9-4.4-5-1.7 0-3.6 0-5.7.2l-.3.3v20l-.6.5H50l-.6-.6V39l.6-.6h14.8c5.7 0 10.4 4.7 10.4 10.5v16.4l-.5.6Zm31.9-11.6-.6.6H89l-.6.5c0 1.1 1.1 4.4 5.5 4.4 1.7 0 3.3-.5 3.9-1.6l.5-.6h6.6l.6.6c-.6 3.3-3.3 8.2-11.6 8.2-9.3 0-13.7-6.6-13.7-14.3S84.6 38 93.4 38s13.2 6.6 13.2 14.2v2.2ZM98.3 49c0-.6-.5-4.4-5-4.4s-4.9 3.8-4.9 4.4l.6.5h8.8l.5-.5Zm23.7 8.7c0 1.1.5 1.7 1.6 1.7h5l.5.5v5.5l-.6.6h-4.9c-5 0-9.3-2.2-9.3-8.3v-12l-.6-.6H110l-.6-.5V39l.6-.6h3.8l.6-.5v-5l.5-.5h6.6l.5.5v5l.6.5h6l.6.6v5.5l-.6.5h-6l-.6.6v12Zm20.3 8.3h-6.6l-.6-.6V28l.6-.6h6.6l.5.6v37.3l-.5.6ZM157 34h-6.6l-.5-.5V28l.5-.6h6.6l.6.6v5.5l-.6.5Zm0 31.9h-6.6l-.5-.6V39l.5-.6h6.6l.6.6v26.3l-.6.6Zm25.8-38v5.6l-.5.5h-5c-1 0-1.6.6-1.6 1.7v2.2l.5.5h5.5l.6.6v5.5l-.6.5h-5.5l-.5.6v19.7l-.6.6h-6.5l-.6-.6V45.5l-.5-.5h-3.9l-.5-.5V39l.5-.6h3.9l.5-.5v-2.2c0-6 4.4-8.3 9.4-8.3h4.9l.5.6Zm20.3 38.5c-2.2 5.5-4.3 8.8-12 8.8h-2.8l-.5-.5v-5.5l.5-.6h2.8c2.7 0 3.3-.5 3.8-2.2V66l-8.8-21.4V39l.6-.6h5l.5.6 6.5 18.7h.6L206 39l.5-.6h5l.5.6v5.5l-8.8 22Z" class="astro-kwmzlgva"></path>
+		</svg>
+	</a>
+	<a href="https://sentry.io/welcome/?utm_medium=partner&utm_source=astro&utm_campaign=astro-docs" aria-label="Sentry" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 44" width="96" aria-hidden="true" class="astro-kwmzlgva">
+			<path d="M29,2.26a4.67,4.67,0,0,0-8,0L14.42,13.53A32.21,32.21,0,0,1,32.17,40.19H27.55A27.68,27.68,0,0,0,12.09,17.47L6,28a15.92,15.92,0,0,1,9.23,12.17H4.62A.76.76,0,0,1,4,39.06l2.94-5a10.74,10.74,0,0,0-3.36-1.9l-2.91,5a4.54,4.54,0,0,0,1.69,6.24A4.66,4.66,0,0,0,4.62,44H19.15a19.4,19.4,0,0,0-8-17.31l2.31-4A23.87,23.87,0,0,1,23.76,44H36.07a35.88,35.88,0,0,0-16.41-31.8l4.67-8a.77.77,0,0,1,1.05-.27c.53.29,20.29,34.77,20.66,35.17a.76.76,0,0,1-.68,1.13H40.6q.09,1.91,0,3.81h4.78A4.59,4.59,0,0,0,50,39.43a4.49,4.49,0,0,0-.62-2.28Z M124.32,28.28,109.56,9.22h-3.68V34.77h3.73V15.19l15.18,19.58h3.26V9.22h-3.73ZM87.15,23.54h13.23V20.22H87.14V12.53h14.93V9.21H83.34V34.77h18.92V31.45H87.14ZM71.59,20.3h0C66.44,19.06,65,18.08,65,15.7c0-2.14,1.89-3.59,4.71-3.59a12.06,12.06,0,0,1,7.07,2.55l2-2.83a14.1,14.1,0,0,0-9-3c-5.06,0-8.59,3-8.59,7.27,0,4.6,3,6.19,8.46,7.52C74.51,24.74,76,25.78,76,28.11s-2,3.77-5.09,3.77a12.34,12.34,0,0,1-8.3-3.26l-2.25,2.69a15.94,15.94,0,0,0,10.42,3.85c5.48,0,9-2.95,9-7.51C79.75,23.79,77.47,21.72,71.59,20.3ZM195.7,9.22l-7.69,12-7.64-12h-4.46L186,24.67V34.78h3.84V24.55L200,9.22Zm-64.63,3.46h8.37v22.1h3.84V12.68h8.37V9.22H131.08ZM169.41,24.8c3.86-1.07,6-3.77,6-7.63,0-4.91-3.59-8-9.38-8H154.67V34.76h3.8V25.58h6.45l6.48,9.2h4.44l-7-9.82Zm-10.95-2.5V12.6h7.17c3.74,0,5.88,1.77,5.88,4.84s-2.29,4.86-5.84,4.86Z" fill="currentColor" class="astro-kwmzlgva"></path>
+		</svg>
+	</a>
+	<a href="https://www.storyblok.com/" aria-label="Storyblok" class="astro-kwmzlgva">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251 53" width="114" aria-hidden="true" class="astro-kwmzlgva">
+			<g class="astro-kwmzlgva">
+				<path d="M73 37c-2 0-3.7-.2-5.5-.7-1.6-.6-3.2-1.5-4.5-2.7l2.4-4c1.3 1 2.5 1.6 3.8 2.1 1.2.6 2.4.8 3.6.8a4 4 0 0 0 2-.5c.4-.3.6-.7.6-1.3 0-.5-.2-1-.9-1.4-1-.4-2-.8-3-1L67.7 27a13 13 0 0 1-2.4-1.3c-.6-.4-1.1-1-1.4-1.6a5 5 0 0 1-.4-2c0-2.2.9-4.1 2.5-5.4a9.3 9.3 0 0 1 6.1-2c1.6 0 3.1.2 4.5.6 1.4.5 2.8 1.3 4.1 2.4l-2.6 4c-1-.8-2-1.4-3.2-1.9a7 7 0 0 0-2.8-.6c-.7 0-1.3.1-1.8.5-.5.2-.7.7-.7 1.3 0 .6.2 1 .8 1.4.5.3 1.5.6 3 1l3.8 1.2L80 26c1.3 1 2 2.5 1.8 4.1a6 6 0 0 1-2.4 5.1 10 10 0 0 1-6.4 1.9Zm25.8-1.4-3 1c-1.2.3-2.4.5-3.6.5-.8 0-1.6 0-2.3-.3a4.3 4.3 0 0 1-3.2-2.7c-.3-.8-.5-1.7-.5-2.7V20h-2.7v-4.9h2.7V8.3h6.5v6.8h4.4v5h-4.4v9c0 .7.2 1.2.6 1.6.3.3.8.4 1.3.4s1 0 1.5-.2l1.4-.6 1.2 5.3ZM111 37c-1.6 0-3.3-.3-4.8-.9a10 10 0 0 1-5.9-6 12 12 0 0 1 0-8.5c1-2.8 3.1-5 5.9-6 1.4-.6 3-1 4.8-1a11 11 0 0 1 10.7 7c1.1 2.7 1.1 5.8 0 8.5-1 2.7-3 5-5.8 6-1.5.6-3.2 1-4.9.9Zm-4.7-11c0 1.7.4 3 1.3 4 1 1 2.1 1.6 3.5 1.6 1.3 0 2.5-.6 3.4-1.6a6.4 6.4 0 0 0 1.4-4 6 6 0 0 0-1.4-4.1c-1-1-2-1.6-3.4-1.6-1.3 0-2.6.6-3.4 1.6a6 6 0 0 0-1 1.8c-.3.7-.4 1.5-.4 2.3Zm33.1-5.2c-1.5 0-3 .3-4.3.8a5.2 5.2 0 0 0-2.8 2.2v13h-6.5V15.1h6v4.3a8.4 8.4 0 0 1 2.9-3.4 6.5 6.5 0 0 1 3.6-1.3h1.1v6Zm2.9 19.1c1 .3 1.9.5 2.8.5.8 0 1.4-.2 1.9-.7a9 9 0 0 0 1.2-3L140 15.2h6.7l5 15.9 4.3-15.9h6.2l-8.2 25a8.5 8.5 0 0 1-11.7 5.3V40Zm35.3-2.8a8.1 8.1 0 0 1-7.2-4v3.6h-5.7v-30h6.6v12a8 8 0 0 1 10.8-3c1.1.5 2 1.3 3 2.3a14 14 0 0 1 1.8 12.4c-.5 1.3-1.2 2.6-2 3.5a9.6 9.6 0 0 1-7.3 3.2Zm-1.8-5.5a5 5 0 0 0 4.7-3.4c.8-2 .4-4.4-1-6.2-.8-1-2-1.7-3.4-1.7-1 0-2 .4-2.8 1-.9.8-1.6 1.7-2 2.8v4.5a5 5 0 0 0 4.6 3Zm15-24.8h6.6V29c0 1.7.7 2.5 2.1 2.5a5 5 0 0 0 2.1-.5l1 4.8a15 15 0 0 1-5.9 1.3c-1.9 0-3.3-.5-4.3-1.5s-1.6-2.4-1.6-4.3V6.8Zm24 30.3c-1.6 0-3.2-.3-4.8-.9-2.7-1-4.9-3.3-5.9-6a12 12 0 0 1 2.2-12 11.3 11.3 0 0 1 8.5-3.4 11 11 0 0 1 10.7 6.9c1.6 4.1.8 8.7-2.2 12a10 10 0 0 1-3.6 2.5c-1.6.6-3.2 1-4.9.9ZM210.2 26c0 1.7.4 3 1.3 4 1 1 2.1 1.6 3.5 1.6 1.3 0 2.5-.6 3.4-1.6a6.4 6.4 0 0 0 1.4-4 6 6 0 0 0-1.4-4.1c-1-1-2-1.6-3.4-1.6-1.3 0-2.6.6-3.4 1.6a6 6 0 0 0-1 1.8c-.3.7-.4 1.4-.4 2.3Zm34 10.7-5.6-8.7-2.3 2.4v6.3h-6.6v-30h6.6v17.4l7.2-8.9h7l-7.8 9.3 8.4 12.2h-7Z" class="astro-kwmzlgva"></path>
+				<path fill="#0AB3AF" d="M2.3 0C1 0 0 1 0 2.3v40.6c0 1.2 1 2 2.3 2h6V53l7.4-8H43c1.3 0 2-.8 2-2.1V2.3c0-1.2-.7-2.3-2-2.3H2.3Z" class="astro-kwmzlgva"></path>
+				<path fill="#FFF" d="M29.1 8.1c1 0 2 .2 2.7.7.8.4 1.5 1 2.1 1.6a7.7 7.7 0 0 1 1.8 5 8 8 0 0 1-1 4 6.5 6.5 0 0 1-3.2 2.7c1.7.5 3 1.3 4 2.5a7.8 7.8 0 0 1 1.4 4.8 6.2 6.2 0 0 1-3 5.6c-1 .6-2 1.2-3.3 1.5-1.2.3-2.6.5-4 .5H8.3V8.1h20.8Zm-3 16.2H15.8v4.9h10c.7 0 1.2-.3 1.7-.7.4-.4.6-1 .6-1.7 0-.6-.2-1.2-.5-1.7-.4-.5-.9-.8-1.5-.8Zm-.8-9.8h-9.5V19H25c.5 0 1-.2 1.4-.5.4-.3.6-1 .6-1.8 0-.7-.2-1.3-.5-1.6a2 2 0 0 0-1.3-.5Z" class="astro-kwmzlgva"></path>
+			</g>
+		</svg>
+	</a>
+</div>
+</div>
+					</div>
+				</div>
+			</nav>
+	<div class="main-frame astro-locgyneq">
+			
+			<script type="module">const n=document.getElementById("starlight__sidebar"),r=n?.querySelector("sl-sidebar-state-persist"),d=[...r?.querySelectorAll("details")||[]],o="sl-sidebar-state",i=()=>{let t=[];const e=r?.dataset.hash||"";try{const s=sessionStorage.getItem(o),a=JSON.parse(s||"{}");Array.isArray(a.open)&&a.hash===e&&(t=a.open)}catch{}return{hash:e,open:t,scroll:n?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},l=()=>c(i()),g=(t,e)=>{const s=i();s.open[e]=t,c(s)};r?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=d.indexOf(e);s!==-1&&g(!e.open,s)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&l()});addEventListener("pageHide",l);</script>
+			<div class="lg:sl-flex astro-la77jigv">
+	<aside class="right-sidebar-container astro-la77jigv">
+				<div class="right-sidebar astro-la77jigv">
+					
+			<div class="lg:sl-hidden astro-evux67hy">
+				<mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-yitqccco">
+			<nav aria-labelledby="starlight__on-this-page--mobile" class="astro-yitqccco">
+				<details id="starlight__mobile-toc" class="astro-yitqccco">
+					<summary id="starlight__on-this-page--mobile" class="sl-flex astro-yitqccco">
+						<div class="toggle sl-flex astro-yitqccco">
+							En esta página
+							<svg aria-hidden="true" class="caret astro-yitqccco astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>
+						</div>
+						<span class="display-current astro-yitqccco"></span>
+					</summary>
+					<div class="dropdown astro-yitqccco">
+						<ul class="isMobile astro-z24hbaiv" style="--depth: 0;">
+	<li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#_top" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Sinopsis</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#configuración" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Configuración</span>
+				</a>
+				<ul class="isMobile astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#componentes-de-frameworks" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Componentes de Frameworks</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#importación-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Importación de tipos</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#alias-de-importación" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Alias de importación</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#extender-window-y-globalthis" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Extender window y globalThis</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#props-de-componentes" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Props de componentes</span>
+				</a>
+				<ul class="isMobile astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#patrones-comunes-de-tipos-de-prop" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Patrones comunes de tipos de prop</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#utilidades-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Utilidades de Tipos</span>
+				</a>
+				<ul class="isMobile astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#atributos-html-integrados" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Atributos HTML integrados</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#tipo-componentprops" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Tipo ComponentProps</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#tipo-polimórfico" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Tipo polimórfico</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#inferir-los-tipos-de-getstaticpaths" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Inferir los tipos de getStaticPaths()</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#verificación-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Verificación de tipos</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#solución-de-problemas" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Solución de problemas</span>
+				</a>
+				<ul class="isMobile astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#errores-usando-múltiples-frameworks-jsx-a-la-vez" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Errores usando múltiples frameworks JSX a la vez</span>
+				</a>
+				
+			</li>
+</ul>
+			</li>
+</ul>
+					</div>
+				</details>
+			</nav>
+		</mobile-starlight-toc>
+
+
+
+<script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.akxnPTHm.js"></script>
+			</div>
+			<div class="right-sidebar-panel sl-hidden lg:sl-block astro-evux67hy">
+				<div class="sl-container astro-evux67hy">
+					<starlight-toc data-min-h="2" data-max-h="3">
+			<nav aria-labelledby="starlight__on-this-page">
+				<h2 id="starlight__on-this-page">
+					En esta página
+				</h2>
+				<ul class="astro-z24hbaiv" style="--depth: 0;">
+	<li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#_top" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Sinopsis</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#configuración" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Configuración</span>
+				</a>
+				<ul class="astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#componentes-de-frameworks" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Componentes de Frameworks</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#importación-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Importación de tipos</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#alias-de-importación" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Alias de importación</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#extender-window-y-globalthis" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Extender window y globalThis</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#props-de-componentes" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Props de componentes</span>
+				</a>
+				<ul class="astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#patrones-comunes-de-tipos-de-prop" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Patrones comunes de tipos de prop</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#utilidades-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Utilidades de Tipos</span>
+				</a>
+				<ul class="astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#atributos-html-integrados" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Atributos HTML integrados</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#tipo-componentprops" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Tipo ComponentProps</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#tipo-polimórfico" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Tipo polimórfico</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#inferir-los-tipos-de-getstaticpaths" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Inferir los tipos de getStaticPaths()</span>
+				</a>
+				
+			</li>
+</ul>
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#verificación-de-tipos" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Verificación de tipos</span>
+				</a>
+				
+			</li><li class="astro-z24hbaiv" style="--depth: 0;">
+				<a href="#solución-de-problemas" class="astro-z24hbaiv" style="--depth: 0;">
+					<span class="astro-z24hbaiv" style="--depth: 0;">Solución de problemas</span>
+				</a>
+				<ul class="astro-z24hbaiv" style="--depth: 1;">
+	<li class="astro-z24hbaiv" style="--depth: 1;">
+				<a href="#errores-usando-múltiples-frameworks-jsx-a-la-vez" class="astro-z24hbaiv" style="--depth: 1;">
+					<span class="astro-z24hbaiv" style="--depth: 1;">Errores usando múltiples frameworks JSX a la vez</span>
+				</a>
+				
+			</li>
+</ul>
+			</li>
+</ul>
+			</nav>
+		</starlight-toc>
+
+<script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.DCp6qTdA.js"></script>
+				</div>
+				<div class="sl-container astro-evux67hy">
+					<aside class="not-content astro-mmwdqvkz">
+	<div class="astro-mmwdqvkz">
+		<a href="https://starlight.astro.build/" class="astro-mmwdqvkz">
+			<h2 class="astro-mmwdqvkz">¿Quieres crear tus propios Docs?</h2>
+		</a>
+		<p class="astro-mmwdqvkz">
+			Toma esta plantilla para comenzar.<b class="astro-mmwdqvkz">→</b>
+		</p>
+	</div>
+	<div class="astro-mmwdqvkz">
+		<img src="/_astro/houston_omg.CKiB_MJZ_wdOqF.webp" alt="" class="astro-mmwdqvkz" width="180" height="112" loading="lazy" decoding="async">
+	</div>
+</aside>
+				</div>
+			</div>
+		
+
+
+				</div>
+			</aside>
+	<div class="main-pane astro-la77jigv">
+				
+				<main data-pagefind-body lang="es" dir="ltr" class="astro-db5uw6gc">
+					
+					
+
+
+					
+								<div class="content-panel astro-e7uqk4z2">
+	<div class="sl-container astro-e7uqk4z2">
+									<h1 id="_top" class="astro-f7uddizy">TypeScript</h1>
+
+
+									</div>
+</div>
+								<div class="content-panel astro-e7uqk4z2">
+	<div class="sl-container astro-e7uqk4z2">
+									<div class="sl-markdown-content astro-klj6ju3r">
+	
+										<p>Astro tiene compatibilidad integrada con <a href="https://www.typescriptlang.org/">TypeScript</a>. Puedes importar archivos <code dir="auto">.ts</code> y <code dir="auto">.tsx</code> en tu proyecto de Astro, escribir código TypeScript directamente dentro del <a href="/es/basics/astro-components/#script-de-un-componente">componente de Astro</a>, e incluso utilizar un archivo de configuración <a href="/es/guides/configuring-astro/#archivo-de-configuraci%C3%B3n-de-astro"><code dir="auto">astro.config.ts</code></a>  si así lo deseas.</p>
+<p>Usando TypeScript, puedes prevenir errores en tiempo de ejecución al definir las formas de los objetos y componentes en tu código. Por ejemplo, si utilizas TypeScript para <a href="#props-de-componentes">tipar las props de tu componente</a>, obtendrás un error en tu editor si estableces una prop que tu componente no acepta.</p>
+<p>No necesitas escribir código de TypeScript en tus proyectos de Astro para obtener beneficios de este. Astro siempre trata el código de tu componente como TypeScript, y la <a href="/es/editor-setup/">Extensión de Astro para VSCode</a> inferirá todo lo que pueda para proporcionar autocompletado, sugerencias, y errores en tu editor.</p>
+<p>El servidor de desarrollo de Astro no realizará ningún chequeo de tipado, pero puedes usar un <a href="#verificaci%C3%B3n-de-tipos">script aparte</a> para verificar errores de tipado desde la línea de comandos.</p>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="configuración">Configuración</h2><a class="anchor-link" href="#configuración"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Configuración</span></a></div>
+<p>Los <em>starter projects</em> de Astro incluyen un archivo <code dir="auto">tsconfig.json</code> en tu proyecto. Incluso si no escribes código TypeScript, este archivo es importante para que herramientas como Astro y VS Code sepan cómo interpretar tu proyecto. Algunas características (como importaciones de paquetes npm) no están totalmente soportadas en el editor sin un archivo <code dir="auto">tsconfig.json</code>. Si instalas Astro manualmente, asegúrate de crear este archivo por ti mismo.</p>
+<p>Tres plantillas extensibles del archivo <code dir="auto">tsconfig.json</code> están incluidas con Astro: <code dir="auto">base</code>, <code dir="auto">strict</code> y <code dir="auto">strictest</code>. La plantilla <code dir="auto">base</code> habilita el soporte para características modernas de JavaScript y también es usada como base para las otras plantillas. Recomendamos usar las plantillas <code dir="auto">strict</code> o <code dir="auto">strictest</code> si planeas escribir TypeScript en tu proyecto. Puedes ver y comparar las tres plantillas en <a href="https://github.com/withastro/astro/blob/main/packages/astro/tsconfigs/">astro/tsconfigs/</a>.</p>
+<p>Para heredar una de las plantillas, usa <a href="https://www.typescriptlang.org/tsconfig#extends">la opción <code dir="auto">extends</code></a>:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.kfc3y.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame has-title not-content"><figcaption class="header"><span class="title">tsconfg.json</span></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#097174">"extends"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">astro/tsconfigs/base</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="{  &#x22;extends&#x22;: &#x22;astro/tsconfigs/base&#x22;}"><div></div></button></div></figure></div>
+<p>Adicionalmente, nuestras plantillas incluyen un archivo <code dir="auto">env.d.ts</code> dentro de la carpeta <code dir="auto">src</code> para proveer <a href="https://vite.dev/guide/features.html#client-types">tipos del cliente de Vite</a> en tu proyecto:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">env.d.ts</span></figcaption><pre data-language="typescript"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">/// </span><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;</span><span style="--0:#CAECE6">reference</span><span style="--0:#7FDBCA"> </span></span><span style="--0:#C5E478;--1:#3C63B3">types</span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#9B504E">astro/client</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#7FDBCA;--1:#8D46B4"> /></span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="/// <reference types=&#x22;astro/client&#x22; />"><div></div></button></div></figure></div>
+<p>Si no estás utilizando VSCode, puedes instalar el <a href="https://www.npmjs.com/package/@astrojs/ts-plugin">plugin de Astro TypeScript</a> para admitir la importación de archivos <code dir="auto">.astro</code> desde archivos <code dir="auto">.ts</code>  (lo cual puede ser útil para volver a exportar).</p>
+
+<script>
+(() => {
+	class StarlightTabsRestore extends HTMLElement {
+		connectedCallback() {
+			const starlightTabs = this.closest('starlight-tabs');
+			if (!(starlightTabs instanceof HTMLElement) || typeof localStorage === 'undefined') return;
+			const syncKey = starlightTabs.dataset.syncKey;
+			if (!syncKey) return;
+			const label = localStorage.getItem(`starlight-synced-tabs__${syncKey}`);
+			if (!label) return;
+			const tabs = [...starlightTabs?.querySelectorAll('[role="tab"]')];
+			const tabIndexToRestore = tabs.findIndex(
+				(tab) => tab instanceof HTMLAnchorElement && tab.textContent?.trim() === label
+			);
+			const panels = starlightTabs?.querySelectorAll('[role="tabpanel"]');
+			const newTab = tabs[tabIndexToRestore];
+			const newPanel = panels[tabIndexToRestore];
+			if (tabIndexToRestore < 1 || !newTab || !newPanel) return;
+			tabs[0]?.setAttribute('aria-selected', 'false');
+			tabs[0]?.setAttribute('tabindex', '-1');
+			panels?.[0]?.setAttribute('hidden', 'true');
+			newTab.removeAttribute('tabindex');
+			newTab.setAttribute('aria-selected', 'true');
+			newPanel.removeAttribute('hidden');
+		}
+	}
+	customElements.define('starlight-tabs-restore', StarlightTabsRestore);
+})()
+</script>
+
+<starlight-tabs data-sync-key="package-managers" class="astro-z3poiwev">
+	<div class="tablist-wrapper not-content astro-z3poiwev">
+				<ul role="tablist" class="astro-z3poiwev">
+					<li role="presentation" class="tab astro-z3poiwev">
+							<a role="tab" href="#tab-panel-978" id="tab-978" aria-selected="true" tabindex="0" class="astro-z3poiwev">
+								
+								npm
+							</a>
+						</li><li role="presentation" class="tab astro-z3poiwev">
+							<a role="tab" href="#tab-panel-979" id="tab-979" aria-selected="false" tabindex="-1" class="astro-z3poiwev">
+								
+								pnpm
+							</a>
+						</li><li role="presentation" class="tab astro-z3poiwev">
+							<a role="tab" href="#tab-panel-980" id="tab-980" aria-selected="false" tabindex="-1" class="astro-z3poiwev">
+								
+								Yarn
+							</a>
+						</li>
+				</ul>
+			</div>
+	
+	<section id="tab-panel-978" aria-labelledby="tab-978" role="tabpanel">
+	
+		<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Ventana de terminal</span></figcaption><pre data-language="shell"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3C63B3">npm</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">install</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">@astrojs/ts-plugin</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="npm install @astrojs/ts-plugin"><div></div></button></div></figure></div>
+	
+</section>
+	<section id="tab-panel-979" aria-labelledby="tab-979" role="tabpanel" hidden>
+	
+		<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Ventana de terminal</span></figcaption><pre data-language="shell"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3C63B3">pnpm</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">add</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">@astrojs/ts-plugin</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="pnpm add @astrojs/ts-plugin"><div></div></button></div></figure></div>
+	
+</section>
+	<section id="tab-panel-980" aria-labelledby="tab-980" role="tabpanel" hidden>
+	
+		<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Ventana de terminal</span></figcaption><pre data-language="shell"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3C63B3">yarn</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">add</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3C63B3">@astrojs/ts-plugin</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="yarn add @astrojs/ts-plugin"><div></div></button></div></figure></div>
+	
+</section>
+
+	<starlight-tabs-restore class="astro-z3poiwev"></starlight-tabs-restore>
+</starlight-tabs>
+
+
+
+<script type="module">class r extends HTMLElement{static#e=new Map;#t;#n="starlight-synced-tabs__";constructor(){super();const t=this.querySelector('[role="tablist"]');if(this.tabs=[...t.querySelectorAll('[role="tab"]')],this.panels=[...this.querySelectorAll(':scope > [role="tabpanel"]')],this.#t=this.dataset.syncKey,this.#t){const i=r.#e.get(this.#t)??[];i.push(this),r.#e.set(this.#t,i)}this.tabs.forEach((i,c)=>{i.addEventListener("click",e=>{e.preventDefault();const n=t.querySelector('[aria-selected="true"]');e.currentTarget!==n&&this.switchTab(e.currentTarget,c)}),i.addEventListener("keydown",e=>{const n=this.tabs.indexOf(e.currentTarget),s=e.key==="ArrowLeft"?n-1:e.key==="ArrowRight"?n+1:e.key==="Home"?0:e.key==="End"?this.tabs.length-1:null;s!==null&&this.tabs[s]&&(e.preventDefault(),this.switchTab(this.tabs[s],s))})})}switchTab(t,i,c=!0){if(!t)return;const e=c?this.getBoundingClientRect().top:0;this.tabs.forEach(s=>{s.setAttribute("aria-selected","false"),s.setAttribute("tabindex","-1")}),this.panels.forEach(s=>{s.hidden=!0});const n=this.panels[i];n&&(n.hidden=!1),t.removeAttribute("tabindex"),t.setAttribute("aria-selected","true"),c&&(t.focus(),r.#r(this,t),window.scrollTo({top:window.scrollY+(this.getBoundingClientRect().top-e)}))}#i(t){!this.#t||typeof localStorage>"u"||localStorage.setItem(this.#n+this.#t,t)}static#r(t,i){const c=t.#t,e=r.#s(i);if(!c||!e)return;const n=r.#e.get(c);if(n){for(const s of n){if(s===t)continue;const a=s.tabs.findIndex(o=>r.#s(o)===e);a!==-1&&s.switchTab(s.tabs[a],a,!1)}t.#i(e)}}static#s(t){return t.textContent?.trim()}}customElements.define("starlight-tabs",r);</script>
+<p>Luego, agrega lo siguiente a tu archivo <code dir="auto">tsconfig.json</code>:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">tsconfig.json</span></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#9B504E">compilerOptions</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#097174">"plugins"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">      </span></span><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#7FDBCA;--1:#097174">"name"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">@astrojs/ts-plugin</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">      </span></span><span style="--0:#D6DEEB;--1:#403F53">},</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">],</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="  &#x22;compilerOptions&#x22;: {    &#x22;plugins&#x22;: [      {        &#x22;name&#x22;: &#x22;@astrojs/ts-plugin&#x22;      },    ],  }"><div></div></button></div></figure></div>
+<p>Para comprobar que el plugin está funcionando, crea un archivo <code dir="auto">.ts</code> e importa un componente de Astro en él. No deberías tener mensajes de advertencia de tu editor.</p>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="componentes-de-frameworks">Componentes de Frameworks</h3><a class="anchor-link" href="#componentes-de-frameworks"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Componentes de Frameworks</span></a></div>
+<p>Si tu proyecto utiliza <a href="/es/guides/framework-components/">componentes de otros framework</a>, es posible que se necesiten configuraciones adicionales dependiendo el framework utilizado. Por favor revisa la documentación de TypeScript de tu framework para más información. (<a href="https://vuejs.org/guide/typescript/overview.html#using-vue-with-typescript">Vue</a>, <a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/setup">React</a>, <a href="https://preactjs.com/guide/v10/typescript">Preact</a>, <a href="https://www.solidjs.com/guides/typescript">Solid</a>)</p>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="importación-de-tipos">Importación de tipos</h2><a class="anchor-link" href="#importación-de-tipos"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Importación de tipos</span></a></div>
+<p>Usa importaciones y exportaciones explícitas de tipos siempre que sea posible.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="js"><code><div class="ec-line highlight del"><div class="code"><span style="--0:#c995eb;--1:#6a3587">import</span><span style="--0:#D6DEEB;--1:#403F53"> { SomeType } </span><span style="--0:#c995eb;--1:#6a3587">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#743c3b">./script</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line highlight ins"><div class="code"><span style="--0:#cb9bec;--1:#6a3587">import</span><span style="--0:#D6DEEB;--1:#403F53"> </span><ins><span style="--0:#d8b4f0;--1:#5d2e76">type</span></ins><span style="--0:#D6DEEB;--1:#403F53"> { SomeType } </span><span style="--0:#cb9bec;--1:#6a3587">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#773d3c">./script</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="import { SomeType } from &#x27;./script&#x27;;import type { SomeType } from &#x27;./script&#x27;;"><div></div></button></div></figure></div>
+<p>Esto te ayudará a evitar casos extremos en los que el empaquetador de Astro intente empaquetar incorrectamente sus tipos importados como si fueran JavaScript.</p>
+<p>Puedes configurar TypeScript para que obligue a realizar importaciones de tipos en tu archivo <code dir="auto">tsconfig.json</code>. Configura <a href="https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax"><code dir="auto">verbatimModuleSyntax</code></a> a <code dir="auto">true</code>. TypeScript verificará tus importaciones y te dirá cuando debes usar <code dir="auto">import type</code>. Esta configuración está habilitada por defecto en todos nuestros presets.</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">tsconfig.json</span></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#097174">"compilerOptions"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line highlight ins"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#075759">"verbatimModuleSyntax"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#ff8b9e;--1:#7c3838">true</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="  {    &#x22;compilerOptions&#x22;: {      &#x22;verbatimModuleSyntax&#x22;: true    }  }"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="alias-de-importación">Alias de importación</h2><a class="anchor-link" href="#alias-de-importación"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Alias de importación</span></a></div>
+<p>Astro es compatible con <a href="/es/guides/imports/#alias">alias de importación</a> definidos en la configuración <code dir="auto">tsconfig.json</code> o <code dir="auto">jsconfig.json</code> usando <code dir="auto">paths</code>.</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/pages/about/nate.astro</span></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> HelloWorld </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><mark><span style="--0:#ECC48D;--1:#834442">@components</span></mark><span style="--0:#ECC48D;--1:#9B504E">/HelloWorld.astro</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> Layout </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><mark><span style="--0:#ECC48D;--1:#834442">@layouts</span></mark><span style="--0:#ECC48D;--1:#9B504E">/Layout.astro</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---import HelloWorld from &#x27;@components/HelloWorld.astro&#x27;;import Layout from &#x27;@layouts/Layout.astro&#x27;;---"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">tsconfig.json</span></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#7FDBCA;--1:#097174">"compilerOptions"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#097174">"baseUrl"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">.</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#097174">"paths"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line highlight mark"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#086164">"@components/*"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#6b4a74">src/components/*</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">],</span></div></div><div class="ec-line highlight mark"><div class="code"><span class="indent">      </span><span style="--0:#7FDBCA;--1:#086164">"@layouts/*"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#6b4a74">src/layouts/*</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">]</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="{  &#x22;compilerOptions&#x22;: {    &#x22;baseUrl&#x22;: &#x22;.&#x22;,    &#x22;paths&#x22;: {      &#x22;@components/*&#x22;: [&#x22;src/components/*&#x22;],      &#x22;@layouts/*&#x22;: [&#x22;src/layouts/*&#x22;]    }  }}"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="extender-window-y-globalthis">Extender <code dir="auto">window</code> y <code dir="auto">globalThis</code></h2><a class="anchor-link" href="#extender-window-y-globalthis"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Extender window y globalThis</span></a></div>
+<p>Es posible que desees agregar una propiedad al objeto global. Puedes hacer esto agregando declaraciones de nivel superior usando la palabra clave <code dir="auto">declare</code> a tu archivo <code dir="auto">env.d.ts</code>:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">env.d.ts</span></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">declare const </span><span style="--0:#82AAFF;--1:#3C63B3">myString</span><span style="--0:#7FDBCA;--1:#097174">:</span><span style="--0:#C792EA;--1:#8D46B4"> </span><span style="--0:#C5E478;--1:#3C63B3">string</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">declare</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">function</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3C63B3">myFunction</span><span style="--0:#D9F5DD;--1:#111111">()</span><span style="--0:#7FDBCA;--1:#097174">:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3C63B3">boolean</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="declare const myString: string;declare function myFunction(): boolean;"><div></div></button></div></figure></div>
+<p>Esto proporcionará tipado a <code dir="auto">globalThis.myString</code> y <code dir="auto">globalThis.myFunction</code>, así como a <code dir="auto">window.myString</code> y <code dir="auto">window.myFunction</code>.</p>
+<p>Ten en cuenta que <code dir="auto">window</code> sólo está disponible en el código del lado del cliente. <code dir="auto">globalThis</code> está disponible tanto en el lado del servidor como en el lado del cliente, pero su valor del lado del servidor no se compartirá con el cliente.</p>
+<p>Si sólo quieres tipar una propiedad en el objeto <code dir="auto">window</code>, proporciona una interfaz <code dir="auto">Window</code> en su lugar:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">env.d.ts</span></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">interface</span><span style="--0:#D6DEEB;--1:#403F53"> Window {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#82AAFF;--1:#3C63B3">myFunction</span><span style="--0:#D9F5DD;--1:#111111">()</span><span style="--0:#7FDBCA;--1:#097174">:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3C63B3">boolean</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="interface Window {  myFunction(): boolean;}"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="props-de-componentes">Props de componentes</h2><a class="anchor-link" href="#props-de-componentes"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Props de componentes</span></a></div>
+<p>Astro soporta escribir los tipos de las propiedades de tus componentes usando TypeScript. Para habilitar esto, agrega una interfaz <code dir="auto">Props</code> a tu componente en el frontmatter. Puedes usar una declaración <code dir="auto">export</code>, pero no es necesaria. La <a href="/es/editor-setup/">Extensión de Astro para VSCode</a> buscará automáticamente la interfaz <code dir="auto">Props</code> y te dará soporte de TS cuando uses ese componente en otra plantilla.</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/components/HelloProps.astro</span></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line highlight ins"><div class="code"><span style="--0:#cb9bec;--1:#6a3587">interface</span><span style="--0:#D6DEEB;--1:#403F53"> Props {</span></div></div><div class="ec-line highlight ins"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">name</span><span style="--0:#7FDBCA;--1:#075759">:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#2e4c89">string</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line highlight ins"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">greeting</span><span style="--0:#7FDBCA;--1:#075759">?:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#2e4c89">string</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line highlight ins"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">const { </span><span style="--0:#82AAFF;--1:#3C63B3">greeting</span><span style="--0:#C792EA;--1:#8D46B4"> = </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">Hola</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#C792EA;--1:#8D46B4">, </span><span style="--0:#82AAFF;--1:#3C63B3">name</span><span style="--0:#C792EA;--1:#8D46B4"> } = </span><span style="--0:#D6DEEB;--1:#403F53">Astro</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">props</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;</span><span style="--0:#CAECE6">h2</span><span style="--0:#7FDBCA">></span></span><span style="--0:#DD6B68;--1:#B73936">{</span><span style="--0:#D6DEEB;--1:#403F53">greeting</span><span style="--0:#DD6B68;--1:#B73936">}</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#DD6B68;--1:#B73936">{</span><span style="--0:#D6DEEB;--1:#403F53">name</span><span style="--0:#DD6B68;--1:#B73936">}</span><span style="--0:#D6DEEB;--1:#403F53">!</span><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;/</span><span style="--0:#CAECE6">h2</span><span style="--0:#7FDBCA">></span></span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---interface Props {  name: string;  greeting?: string;}const { greeting = &#x27;Hola&#x27;, name } = Astro.props;---<h2>{greeting}, {name}!</h2>"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="patrones-comunes-de-tipos-de-prop">Patrones comunes de tipos de prop</h3><a class="anchor-link" href="#patrones-comunes-de-tipos-de-prop"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Patrones comunes de tipos de prop</span></a></div>
+<ul>
+<li>Si tu componente no recibe props ni slots, puedes utilizar <code dir="auto">type Props = Record&#x3C;string, never></code>.</li>
+<li>Si tu componente debe recibir children en el slot de forma predeterminada, puedes forzar esto usando <code dir="auto">type Props = { children: any; };</code>.</li>
+</ul>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="utilidades-de-tipos">Utilidades de Tipos</h2><a class="anchor-link" href="#utilidades-de-tipos"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Utilidades de Tipos</span></a></div>
+<p><span>
+	<strong>Agregado en:</strong>
+	<code>astro@1.6.0</code>
+	
+	
+</span></p>
+<p>Astro tiene algunas utilidades de tipos integradas para patrones de tipos de props comunes. Estos están disponibles en la extensión <code dir="auto">astro/types</code>.</p>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="atributos-html-integrados">Atributos HTML integrados</h3><a class="anchor-link" href="#atributos-html-integrados"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Atributos HTML integrados</span></a></div>
+<p>Astro provee el tipo <code dir="auto">HTMLAttributes</code> para verificar que las etiquetas estén usando atributos HTML válidos. Puedes usar estos tipos para ayudar a construir props en tus componentes.</p>
+<p>Por ejemplo, si estuvieras construyendo un componente <code dir="auto">&#x3C;Link></code>, podrías hacer lo siguiente para reflejar los atributos HTML por defecto para las etiquetas <code dir="auto">&#x3C;a></code> en los tipos de props de tu componente.</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/components/Link.astro</span></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><ins><span style="--0:#D6DEEB;--1:#403F53">HTMLAttributes</span></ins><span style="--0:#D6DEEB;--1:#403F53"> } </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">astro/types</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">// usa un `type`</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> Props </span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><ins><span style="--0:#FFCB8B;--1:#111111">HTMLAttributes</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#773d3c">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">></span></ins><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">// o extiendelo con una `interface`</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">interface</span><span style="--0:#D6DEEB;--1:#403F53"> Props </span><span style="--0:#C792EA;--1:#8D46B4">extends</span><span style="--0:#D6DEEB;--1:#403F53"> </span><ins><span style="--0:#C5E478;--1:#2e4c89">HTMLAttributes</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#773d3c">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">></span></ins><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">myProp</span><span style="--0:#7FDBCA;--1:#097174">?:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3C63B3">boolean</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">const { </span><span style="--0:#82AAFF;--1:#3C63B3">href</span><span style="--0:#C792EA;--1:#8D46B4">, </span><span style="--0:#7FDBCA;--1:#097174">...</span><span style="--0:#82AAFF;--1:#3C63B3">attrs</span><span style="--0:#C792EA;--1:#8D46B4"> } = </span><span style="--0:#D6DEEB;--1:#403F53">Astro</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">props</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;</span><span style="--0:#CAECE6">a</span><span style="--0:#7FDBCA"> </span></span><span style="--0:#C5E478;--1:#3C63B3">href</span><span style="--0:#7FDBCA;--1:#8D46B4">=</span><span style="--0:#DD6B68;--1:#B73936">{</span><span style="--0:#D6DEEB;--1:#403F53">href</span><span style="--0:#DD6B68;--1:#B73936">}</span><span style="--0:#7FDBCA;--1:#8D46B4"> {</span><span style="--0:#7FDBCA;--1:#097174">...</span><span style="--0:#D6DEEB;--1:#403F53">attrs</span><span style="--0:#7FDBCA;--1:#8D46B4">}></span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;</span><span style="--0:#CAECE6">slot</span><span style="--0:#7FDBCA"> /></span></span></div></div><div class="ec-line"><div class="code"><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;/</span><span style="--0:#CAECE6">a</span><span style="--0:#7FDBCA">></span></span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---import type { HTMLAttributes } from &#x27;astro/types&#x27;;// usa un &#x60;type&#x60;type Props = HTMLAttributes<&#x27;a&#x27;>;// o extiendelo con una &#x60;interface&#x60;interface Props extends HTMLAttributes<&#x27;a&#x27;> {  myProp?: boolean;}const { href, ...attrs } = Astro.props;---<a href={href} {...attrs}>  <slot /></a>"><div></div></button></div></figure></div>
+<p>También es posible extender las definiciones de JSX por defecto para agregar atributos no estándar, redeclarando el namespace <code dir="auto">astroHTML.JSX</code> en un archivo <code dir="auto">.d.ts</code>.</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/custom-attributes.d.ts</span></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">declare</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> astroHTML</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#D6DEEB;--1:#403F53">JSX {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8D46B4">interface</span><span style="--0:#D6DEEB;--1:#403F53"> HTMLAttributes {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">data-count</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#7FDBCA;--1:#097174">?:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3C63B3">number</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">data-label</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#7FDBCA;--1:#097174">?:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3C63B3">string</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#809191;--1:#5E6578">// Añade una propiedad personalizada de CSS al objeto de estilo.</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#C792EA;--1:#8D46B4">interface</span><span style="--0:#D6DEEB;--1:#403F53"> CSSProperties {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">--theme-color</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#7FDBCA;--1:#097174">?:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">black</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#097174">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">white</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="declare namespace astroHTML.JSX {  interface HTMLAttributes {    &#x27;data-count&#x27;?: number;    &#x27;data-label&#x27;?: string;  }  // Añade una propiedad personalizada de CSS al objeto de estilo.  interface CSSProperties {    &#x27;--theme-color&#x27;?: &#x27;black&#x27; | &#x27;white&#x27;;  }}"><div></div></button></div></figure></div>
+<aside aria-label="Nota" class="starlight-aside starlight-aside--note"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path d="M12 11C11.7348 11 11.4804 11.1054 11.2929 11.2929C11.1054 11.4804 11 11.7348 11 12V16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16V12C13 11.7348 12.8946 11.4804 12.7071 11.2929C12.5196 11.1054 12.2652 11 12 11ZM12.38 7.08C12.1365 6.97998 11.8635 6.97998 11.62 7.08C11.4973 7.12759 11.3851 7.19896 11.29 7.29C11.2017 7.3872 11.1306 7.49882 11.08 7.62C11.024 7.73868 10.9966 7.86882 11 8C10.9992 8.13161 11.0245 8.26207 11.0742 8.38391C11.124 8.50574 11.1973 8.61656 11.29 8.71C11.3872 8.79833 11.4988 8.86936 11.62 8.92C11.7715 8.98224 11.936 9.00632 12.099 8.99011C12.2619 8.97391 12.4184 8.91792 12.5547 8.82707C12.691 8.73622 12.8029 8.61328 12.8805 8.46907C12.9582 8.32486 12.9992 8.16378 13 8C12.9963 7.73523 12.8927 7.48163 12.71 7.29C12.6149 7.19896 12.5028 7.12759 12.38 7.08ZM12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C10.4178 20 8.87104 19.5308 7.55544 18.6518C6.23985 17.7727 5.21447 16.5233 4.60897 15.0615C4.00347 13.5997 3.84504 11.9911 4.15372 10.4393C4.4624 8.88743 5.22433 7.46197 6.34315 6.34315C7.46197 5.22433 8.88743 4.4624 10.4393 4.15372C11.9911 3.84504 13.5997 4.00346 15.0615 4.60896C16.5233 5.21447 17.7727 6.23984 18.6518 7.55544C19.5308 8.87103 20 10.4177 20 12C20 14.1217 19.1572 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z"></path></svg>Nota</p><section class="starlight-aside__content"><p><code dir="auto">astroHTML</code> es inyectado de manera global en los componentes <code dir="auto">.astro</code>. Para usarlo en archivos de TypeScript, utiliza una <a href="https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html">directiva de triple barra</a>:</p><div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="ts"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">/// </span><span style="--1:#8D46B4"><span style="--0:#7FDBCA">&#x3C;</span><span style="--0:#CAECE6">reference</span><span style="--0:#7FDBCA"> </span></span><span style="--0:#C5E478;--1:#3C63B3">types</span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#9B504E">astro/astro-jsx</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#7FDBCA;--1:#8D46B4"> /></span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> MyAttributes </span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D6DEEB;--1:#403F53"> astroHTML</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#D6DEEB;--1:#403F53">JSX</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#FFCB8B;--1:#111111">ImgHTMLAttributes</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="/// <reference types=&#x22;astro/astro-jsx&#x22; />type MyAttributes = astroHTML.JSX.ImgHTMLAttributes;"><div></div></button></div></figure></div></section></aside>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="tipo-componentprops">Tipo <code dir="auto">ComponentProps</code></h3><a class="anchor-link" href="#tipo-componentprops"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Tipo ComponentProps</span></a></div>
+<p><span>
+	<strong>Agregado en:</strong>
+	<code>astro@4.3.0</code>
+	
+	
+</span></p>
+<p>Esta exportación de tipos te permite hacer referencia a las <code dir="auto">Props</code> aceptadas por otro componente, incluso si ese componente no exporta ese tipo de <code dir="auto">Props</code> directamente.</p>
+<p>El siguiente ejemplo muestra el uso de la utilidad <code dir="auto">ComponentProps</code> de <code dir="auto">astro/types</code> para referenciar los tipos <code dir="auto">Props</code> de un componente <code dir="auto">&#x3C;Button /></code>:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/pages/index.astro</span></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> { ComponentProps } </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">astro/types</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> Button </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#9B504E">./Button.astro</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> ButtonProps </span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">ComponentProps</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;</span><span style="--0:#7FDBCA;--1:#097174">typeof</span><span style="--0:#D6DEEB;--1:#403F53"> Button>;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---import type { ComponentProps } from &#x27;astro/types&#x27;;import Button from &#x22;./Button.astro&#x22;;type ButtonProps = ComponentProps<typeof Button>;---"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="tipo-polimórfico">Tipo polimórfico</h3><a class="anchor-link" href="#tipo-polimórfico"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Tipo polimórfico</span></a></div>
+<p><span>
+	<strong>Agregado en:</strong>
+	<code>astro@2.5.0</code>
+	
+	
+</span></p>
+<p>Astro incluye un helper para facilitar la construcción de componentes que pueden renderizarse como diferentes elementos HTML con total seguridad de tipos. Esto es útil para componentes como <code dir="auto">&#x3C;Link></code> que pueden renderizarse como <code dir="auto">&#x3C;a></code> o <code dir="auto">&#x3C;button></code> dependiendo de las props que se le pasen.</p>
+<p>El ejemplo a continuación implementa un componente completamente tipado y polimórfico que puede representarse como cualquier elemento HTML. El tipo <a href="#atributos-html-integrados"><code dir="auto">HTMLTag</code></a> se utiliza para garantizar que la propiedad <code dir="auto">as</code> sea un elemento HTML válido.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">import</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> { HTMLTag, Polymorphic } </span><span style="--0:#C792EA;--1:#8D46B4">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">astro/types</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">type</span><span style="--0:#D6DEEB;--1:#403F53"> Props&#x3C;</span><span style="--0:#FFCB8B;--1:#111111">Tag</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8D46B4">extends</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">HTMLTag</span><span style="--0:#D6DEEB;--1:#403F53">> </span><span style="--0:#C792EA;--1:#8D46B4">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">Polymorphic</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;{ as</span><span style="--0:#7FDBCA;--1:#097174">:</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">Tag</span><span style="--0:#D6DEEB;--1:#403F53"> }>;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">const { </span><span style="--0:#D6DEEB;--1:#403F53">as</span><span style="--0:#C792EA;--1:#8D46B4">: </span><span style="--0:#82AAFF;--1:#3C63B3">Tag</span><span style="--0:#C792EA;--1:#8D46B4">, </span><span style="--0:#7FDBCA;--1:#097174">...</span><span style="--0:#82AAFF;--1:#3C63B3">props</span><span style="--0:#C792EA;--1:#8D46B4"> } = </span><span style="--0:#D6DEEB;--1:#403F53">Astro</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">props</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#8D46B4">&#x3C;</span><span style="--0:#C5E478;--1:#3C63B3">Tag</span><span style="--0:#7FDBCA;--1:#8D46B4"> {</span><span style="--0:#7FDBCA;--1:#097174">...</span><span style="--0:#D6DEEB;--1:#403F53">props</span><span style="--0:#7FDBCA;--1:#8D46B4">} /></span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---import type { HTMLTag, Polymorphic } from &#x27;astro/types&#x27;;type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }>;const { as: Tag, ...props } = Astro.props;---<Tag {...props} />"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="inferir-los-tipos-de-getstaticpaths">Inferir los tipos de <code dir="auto">getStaticPaths()</code></h3><a class="anchor-link" href="#inferir-los-tipos-de-getstaticpaths"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Inferir los tipos de getStaticPaths()</span></a></div>
+<p><span>
+	<strong>Agregado en:</strong>
+	<code>astro@2.1.0</code>
+	
+	
+</span></p>
+<p>Astro incluye ayudantes para trabajar con los tipos devueltos por tu función <a href="/es/reference/api-reference/#getstaticpaths"><code dir="auto">getStaticPaths()</code></a> para rutas dinámicas.</p>
+<p>Puedes obtener el tipo de <a href="/es/reference/api-reference/#astroparams"><code dir="auto">Astro.params</code></a> con <code dir="auto">InferGetStaticParamsType</code> y el tipo de <a href="/es/reference/api-reference/#astroprops"><code dir="auto">Astro.props</code></a> con <code dir="auto">InferGetStaticPropsType</code>:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">src/pages/posts/[...slug].astro</span></figcaption><pre data-language="astro"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div><div class="ec-line highlight mark"><div class="code"><span style="--0:#C792EA;--1:#773b98">import</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#773b98">type</span><span style="--0:#D6DEEB;--1:#403F53"> { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } </span><span style="--0:#C792EA;--1:#773b98">from</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#834442">astro</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">export const </span><span style="--0:#82AAFF;--1:#3C63B3">getStaticPaths</span><span style="--0:#C792EA;--1:#8D46B4"> = </span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8D46B4">async </span><span style="--0:#D9F5DD;--1:#111111">()</span><span style="--0:#C792EA;--1:#8D46B4"> => {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">  </span></span><span style="--0:#C792EA;--1:#8D46B4">const </span><span style="--0:#82AAFF;--1:#3C63B3">posts</span><span style="--0:#C792EA;--1:#8D46B4"> = await </span><span style="--0:#82AAFF;--1:#3C63B3">getCollection</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#9B504E">blog</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">)</span><span style="--0:#C792EA;--1:#8D46B4">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">  </span></span><span style="--0:#C792EA;--1:#8D46B4">return </span><span style="--0:#D6DEEB;--1:#403F53">posts</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#82AAFF;--1:#3C63B3">map</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#D7DBE0;--1:#403F53">post</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#C792EA;--1:#8D46B4"> => {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">    </span></span><span style="--0:#C792EA;--1:#8D46B4">return {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">      </span></span><span style="--0:#C792EA;--1:#8D46B4">params: { slug: </span><span style="--0:#D6DEEB;--1:#403F53">post</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">slug</span><span style="--0:#C792EA;--1:#8D46B4"> },</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">      </span></span><span style="--0:#C792EA;--1:#8D46B4">props: { draft: </span><span style="--0:#D6DEEB;--1:#403F53">post</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#FAF39F;--1:#111111">data</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">draft</span><span style="--0:#C792EA;--1:#8D46B4">, title: </span><span style="--0:#D6DEEB;--1:#403F53">post</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#FAF39F;--1:#111111">data</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">title</span><span style="--0:#C792EA;--1:#8D46B4"> },</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">    </span></span><span style="--0:#C792EA;--1:#8D46B4">};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#C792EA;--1:#8D46B4">  </span></span><span style="--0:#C792EA;--1:#8D46B4">}</span><span style="--0:#D6DEEB;--1:#403F53">)</span><span style="--0:#C792EA;--1:#8D46B4">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">}</span><span style="--0:#D6DEEB;--1:#403F53">)</span><span style="--0:#C792EA;--1:#8D46B4"> satisfies </span><span style="--0:#FFCB8B;--1:#111111">GetStaticPaths</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line highlight mark"><div class="code"><span style="--0:#C792EA;--1:#773b98">type</span><span style="--0:#D6DEEB;--1:#403F53"> Params </span><span style="--0:#C792EA;--1:#773b98">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">InferGetStaticParamsType</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;</span><span style="--0:#7FDBCA;--1:#086164">typeof</span><span style="--0:#D6DEEB;--1:#403F53"> getStaticPaths>;</span></div></div><div class="ec-line highlight mark"><div class="code"><span style="--0:#C792EA;--1:#773b98">type</span><span style="--0:#D6DEEB;--1:#403F53"> Props </span><span style="--0:#C792EA;--1:#773b98">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">InferGetStaticPropsType</span><span style="--0:#D6DEEB;--1:#403F53">&#x3C;</span><span style="--0:#7FDBCA;--1:#086164">typeof</span><span style="--0:#D6DEEB;--1:#403F53"> getStaticPaths>;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">const { </span><span style="--0:#82AAFF;--1:#3C63B3">slug</span><span style="--0:#C792EA;--1:#8D46B4"> } = </span><span style="--0:#D6DEEB;--1:#403F53">Astro</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">params</span><span style="--0:#C792EA;--1:#8D46B4"> as </span><span style="--0:#FFCB8B;--1:#111111">Params</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">//                      ^? { slug: string; }</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8D46B4">const { </span><span style="--0:#82AAFF;--1:#3C63B3">title</span><span style="--0:#C792EA;--1:#8D46B4"> } = </span><span style="--0:#D6DEEB;--1:#403F53">Astro</span><span style="--0:#C792EA;--1:#8D46B4">.</span><span style="--0:#7FDBCA;--1:#097174">props</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">//                      ^? { draft: boolean; title: string; }</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">---</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="---import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from &#x27;astro&#x27;;export const getStaticPaths = (async () => {  const posts = await getCollection(&#x27;blog&#x27;);  return posts.map((post) => {    return {      params: { slug: post.slug },      props: { draft: post.data.draft, title: post.data.title },    };  });}) satisfies GetStaticPaths;type Params = InferGetStaticParamsType<typeof getStaticPaths>;type Props = InferGetStaticPropsType<typeof getStaticPaths>;const { slug } = Astro.params as Params;//                      ^? { slug: string; }const { title } = Astro.props;//                      ^? { draft: boolean; title: string; }---"><div></div></button></div></figure></div>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="verificación-de-tipos">Verificación de tipos</h2><a class="anchor-link" href="#verificación-de-tipos"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Verificación de tipos</span></a></div>
+<p>Para ver errores de tipos en tu editor, asegúrate de tener instalada la <a href="/es/editor-setup/">extensión de Astro VS Code</a>. Ten en cuenta que los comandos <code dir="auto">astro start</code> y <code dir="auto">astro build</code> transpilarán el código con esbuild, pero no ejecutarán ninguna verificación de tipos. Para evitar que tu código se compile si contiene errores de TypeScript, cambia tu script de “compilación” en <code dir="auto">package.json</code> a lo siguiente:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">package.json</span></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#9B504E">scripts</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div></div><div class="ec-line highlight del"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#075557">"build"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#cd96db;--1:#5f4267">astro build</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line highlight ins"><div class="code"><span class="indent">    </span><span style="--0:#7FDBCA;--1:#075759">"build"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><ins><span style="--0:#dcb4e5;--1:#533a5a">astro check &#x26;&#x26;</span></ins><span style="--0:#d09bdc;--1:#614369"> astro build</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">  </span></span><span style="--0:#D6DEEB;--1:#403F53">},</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="  &#x22;scripts&#x22;: {    &#x22;build&#x22;: &#x22;astro build&#x22;,    &#x22;build&#x22;: &#x22;astro check &#x26;&#x26; astro build&#x22;,  },"><div></div></button></div></figure></div>
+<aside aria-label="Nota" class="starlight-aside starlight-aside--note"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path d="M12 11C11.7348 11 11.4804 11.1054 11.2929 11.2929C11.1054 11.4804 11 11.7348 11 12V16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16V12C13 11.7348 12.8946 11.4804 12.7071 11.2929C12.5196 11.1054 12.2652 11 12 11ZM12.38 7.08C12.1365 6.97998 11.8635 6.97998 11.62 7.08C11.4973 7.12759 11.3851 7.19896 11.29 7.29C11.2017 7.3872 11.1306 7.49882 11.08 7.62C11.024 7.73868 10.9966 7.86882 11 8C10.9992 8.13161 11.0245 8.26207 11.0742 8.38391C11.124 8.50574 11.1973 8.61656 11.29 8.71C11.3872 8.79833 11.4988 8.86936 11.62 8.92C11.7715 8.98224 11.936 9.00632 12.099 8.99011C12.2619 8.97391 12.4184 8.91792 12.5547 8.82707C12.691 8.73622 12.8029 8.61328 12.8805 8.46907C12.9582 8.32486 12.9992 8.16378 13 8C12.9963 7.73523 12.8927 7.48163 12.71 7.29C12.6149 7.19896 12.5028 7.12759 12.38 7.08ZM12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C10.4178 20 8.87104 19.5308 7.55544 18.6518C6.23985 17.7727 5.21447 16.5233 4.60897 15.0615C4.00347 13.5997 3.84504 11.9911 4.15372 10.4393C4.4624 8.88743 5.22433 7.46197 6.34315 6.34315C7.46197 5.22433 8.88743 4.4624 10.4393 4.15372C11.9911 3.84504 13.5997 4.00346 15.0615 4.60896C16.5233 5.21447 17.7727 6.23984 18.6518 7.55544C19.5308 8.87103 20 10.4177 20 12C20 14.1217 19.1572 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z"></path></svg>Nota</p><section class="starlight-aside__content"><p><code dir="auto">astro check</code> verifica todos los archivos incluidos en tu proyecto TypeScript. Para chequeo de tipos dentro de archivos de Svelte y Vue, puedes usar los paquetes <a href="https://www.npmjs.com/package/svelte-check"><code dir="auto">svelte-check</code></a> y <a href="https://www.npmjs.com/package/vue-tsc"><code dir="auto">vue-tsc</code></a> respectivamente.</p></section></aside>
+<div class="read-more astro-szj46hnz">
+	<svg aria-hidden="true" class="icon astro-szj46hnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.17 2.06A13.1 13.1 0 0 0 19 1.87a12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2 13.1 13.1 0 0 0-2.17.19 1 1 0 0 0-.83 1v12a1 1 0 0 0 1.17 1 10.9 10.9 0 0 1 8.25 1.91l.12.07h.11a.91.91 0 0 0 .7 0h.11l.12-.07A10.899 10.899 0 0 1 20.83 16 1 1 0 0 0 22 15V3a1 1 0 0 0-.83-.94ZM11 15.35a12.87 12.87 0 0 0-6-1.48H4v-10c.333-.02.667-.02 1 0a10.86 10.86 0 0 1 6 1.8v9.68Zm9-1.44h-1a12.87 12.87 0 0 0-6 1.48V5.67a10.86 10.86 0 0 1 6-1.8c.333-.02.667-.02 1 0v10.04Zm1.17 4.15a13.098 13.098 0 0 0-2.17-.19 12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2.05c-.727.003-1.453.066-2.17.19A1 1 0 0 0 2 19.21a1 1 0 0 0 1.17.79 10.9 10.9 0 0 1 8.25 1.91 1 1 0 0 0 1.16 0A10.9 10.9 0 0 1 20.83 20a1 1 0 0 0 1.17-.79 1 1 0 0 0-.83-1.15Z"/></svg>
+	<span class="astro-szj46hnz">Lee más sobre las <a href="/es/guides/imports/#typescript">importaciones de archivos <code dir="auto">.ts</code></a> en Astro.</span>
+</div>
+<div class="read-more astro-szj46hnz">
+	<svg aria-hidden="true" class="icon astro-szj46hnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.17 2.06A13.1 13.1 0 0 0 19 1.87a12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2 13.1 13.1 0 0 0-2.17.19 1 1 0 0 0-.83 1v12a1 1 0 0 0 1.17 1 10.9 10.9 0 0 1 8.25 1.91l.12.07h.11a.91.91 0 0 0 .7 0h.11l.12-.07A10.899 10.899 0 0 1 20.83 16 1 1 0 0 0 22 15V3a1 1 0 0 0-.83-.94ZM11 15.35a12.87 12.87 0 0 0-6-1.48H4v-10c.333-.02.667-.02 1 0a10.86 10.86 0 0 1 6 1.8v9.68Zm9-1.44h-1a12.87 12.87 0 0 0-6 1.48V5.67a10.86 10.86 0 0 1 6-1.8c.333-.02.667-.02 1 0v10.04Zm1.17 4.15a13.098 13.098 0 0 0-2.17-.19 12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2.05c-.727.003-1.453.066-2.17.19A1 1 0 0 0 2 19.21a1 1 0 0 0 1.17.79 10.9 10.9 0 0 1 8.25 1.91 1 1 0 0 0 1.16 0A10.9 10.9 0 0 1 20.83 20a1 1 0 0 0 1.17-.79 1 1 0 0 0-.83-1.15Z"/></svg>
+	<span class="astro-szj46hnz">Lee más sobre la <a href="https://www.typescriptlang.org/tsconfig/">configuración de TypeScript</a>.</span>
+</div>
+<div tabindex="-1" class="heading-wrapper level-h2"><h2 id="solución-de-problemas">Solución de problemas</h2><a class="anchor-link" href="#solución-de-problemas"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Solución de problemas</span></a></div>
+<div tabindex="-1" class="heading-wrapper level-h3"><h3 id="errores-usando-múltiples-frameworks-jsx-a-la-vez">Errores usando múltiples frameworks JSX a la vez</h3><a class="anchor-link" href="#errores-usando-múltiples-frameworks-jsx-a-la-vez"><span aria-hidden="true" class="anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span is:raw class="sr-only">Sección titulada Errores usando múltiples frameworks JSX a la vez</span></a></div>
+<p>Puedes tener errores al utilizar múltiples frameworks JSX en el mismo proyecto, ya que cada framework requiere diferentes, y algunas veces, conflictivas configuraciones dentro del archivo <code dir="auto">tsconfig.json.</code></p>
+<p><strong>Solución</strong>: Establece la <a href="https://www.typescriptlang.org/tsconfig#jsxImportSource">configuración <code dir="auto">jsxImportSource</code></a> a <code dir="auto">react</code> (por defecto), <code dir="auto">preact</code> o <code dir="auto">solid-js</code> dependiendo cuál sea el framework más utilizado. Luego, usa un <a href="https://www.typescriptlang.org/docs/handbook/jsx.html#configuring-jsx">comentario pragma</a> dentro de cada archivo conflictivo de un framework distinto al establecido anteriormente.</p>
+<p>Para la configuración por defecto <code dir="auto">jsxImportSource: react</code>, deberías hacer lo siguiente:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="jsx"><code><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">// Para Preact</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">/** </span><span style="--0:#C792EA;--1:#8D46B4">@jsxImportSource</span><span style="--0:#809191;--1:#616671"> preact */</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#5E6578">// Para Solid</span></div></div><div class="ec-line"><div class="code"><span style="--0:#809191;--1:#616671">/** </span><span style="--0:#C792EA;--1:#8D46B4">@jsxImportSource</span><span style="--0:#809191;--1:#616671"> solid-js */</span></div></div></code></pre><div class="copy"><button title="Copiar al portapapeles" data-copied="¡Copiado!" data-code="// Para Preact/** @jsxImportSource preact */// Para Solid/** @jsxImportSource solid-js */"><div></div></button></div></figure></div>
+									
+
+	
+	
+	
+	
+	
+	
+	<span id="docsearch-lvl0" hidden class="astro-klj6ju3r">Learn</span>
+</div>
+									<footer class="sl-flex astro-z4ohbyju">
+	<div class="meta sl-flex astro-z4ohbyju">
+		<div class="sl-flex astro-dvlentyv">
+			<a href="https://github.com/withastro/docs/edit/main/src/content/docs/es/guides/typescript.mdx" class="sl-flex astro-dvlentyv">
+				<svg aria-hidden="true" class="astro-dvlentyv astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>
+				Edita esta página
+			</a>
+			<a href="https://contribute.docs.astro.build/guides/i18n/" class="sl-flex astro-dvlentyv">
+				<svg aria-hidden="true" class="astro-dvlentyv astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path fill-rule="evenodd" d="M8.516 3a.94.94 0 0 0-.941.94v1.15H2.94a.94.94 0 1 0 0 1.882h7.362a7.422 7.422 0 0 1-1.787 3.958 7.42 7.42 0 0 1-1.422-2.425.94.94 0 1 0-1.774.627 9.303 9.303 0 0 0 1.785 3.043 7.422 7.422 0 0 1-4.164 1.278.94.94 0 1 0 0 1.881 9.303 9.303 0 0 0 5.575-1.855 9.303 9.303 0 0 0 4.11 1.74l-.763 1.525a.968.968 0 0 0-.016.034l-1.385 2.77a.94.94 0 1 0 1.683.841l1.133-2.267h5.806l1.134 2.267a.94.94 0 0 0 1.683-.841l-1.385-2.769a.95.95 0 0 0-.018-.036l-3.476-6.951a.94.94 0 0 0-1.682 0l-1.82 3.639a7.423 7.423 0 0 1-3.593-1.256 9.303 9.303 0 0 0 2.27-5.203h1.894a.94.94 0 0 0 0-1.881H9.456V3.94A.94.94 0 0 0 8.516 3Zm6.426 11.794a1.068 1.068 0 0 1-.02.039l-.703 1.407h3.924l-1.962-3.924-1.24 2.478Z" clip-rule="evenodd"/></svg> Traducir esta página
+			</a>
+		</div>
+
+
+		
+	</div>
+	<div class="pagination-links astro-i5iq4e4d" dir="ltr">
+	<a href="/es/reference/components-reference/" rel="prev" class="astro-i5iq4e4d">
+				<svg aria-hidden="true" class="astro-i5iq4e4d astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>
+				<span class="astro-i5iq4e4d">
+					Página anterior
+					<br class="astro-i5iq4e4d">
+					<span class="link-title astro-i5iq4e4d">Built-in Components</span>
+				</span>
+			</a>
+	<a href="/es/reference/error-reference/" rel="next" class="astro-i5iq4e4d">
+				<svg aria-hidden="true" class="astro-i5iq4e4d astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg>
+				<span class="astro-i5iq4e4d">
+					Siguiente página
+					<br class="astro-i5iq4e4d">
+					<span class="link-title astro-i5iq4e4d">Referencia de Errores</span>
+				</span>
+			</a>
+</div>
+
+	
+</footer>
+<section class="sl-flex astro-m2zh2vwj">
+	<a href="/es/contribute/" class="sl-flex astro-m2zh2vwj">
+		<svg aria-hidden="true" class="astro-m2zh2vwj astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M21.17 2.06A13.1 13.1 0 0 0 19 1.87a12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2 13.1 13.1 0 0 0-2.17.19 1 1 0 0 0-.83 1v12a1 1 0 0 0 1.17 1 10.9 10.9 0 0 1 8.25 1.91l.12.07h.11a.91.91 0 0 0 .7 0h.11l.12-.07A10.899 10.899 0 0 1 20.83 16 1 1 0 0 0 22 15V3a1 1 0 0 0-.83-.94ZM11 15.35a12.87 12.87 0 0 0-6-1.48H4v-10c.333-.02.667-.02 1 0a10.86 10.86 0 0 1 6 1.8v9.68Zm9-1.44h-1a12.87 12.87 0 0 0-6 1.48V5.67a10.86 10.86 0 0 1 6-1.8c.333-.02.667-.02 1 0v10.04Zm1.17 4.15a13.098 13.098 0 0 0-2.17-.19 12.94 12.94 0 0 0-7 2.05 12.94 12.94 0 0 0-7-2.05c-.727.003-1.453.066-2.17.19A1 1 0 0 0 2 19.21a1 1 0 0 0 1.17.79 10.9 10.9 0 0 1 8.25 1.91 1 1 0 0 0 1.16 0A10.9 10.9 0 0 1 20.83 20a1 1 0 0 0 1.17-.79 1 1 0 0 0-.83-1.15Z"/></svg>
+		Contribuir
+	</a>
+
+	<feedback-form class="astro-skt2cqnz">
+	<button data-open-modal disabled class="astro-skt2cqnz">
+		<svg aria-hidden="true" class="astro-skt2cqnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M19 2H5a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h11.6l3.7 3.7a1 1 0 0 0 .7.3.8.8 0 0 0 .4 0 1 1 0 0 0 .6-1V5a3 3 0 0 0-3-3m1 16.6-2.3-2.3a1 1 0 0 0-.7-.3H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1Z"/></svg>
+		Danos tu opinión
+	</button>
+
+	<dialog style="padding:0" aria-label="Formulario de opinión" class="astro-skt2cqnz">
+		<div class="dialog-frame astro-skt2cqnz">
+			<button data-close-modal class="astro-skt2cqnz">
+				<span class="sr-only astro-skt2cqnz">Cerrar formulario de opinión</span>
+				<svg aria-hidden="true" class="astro-skt2cqnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 2em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg>
+			</button>
+			<div class="select-pane astro-skt2cqnz" tabindex="-1">
+				<h1 class="astro-skt2cqnz">¿Qué tienes en mente?</h1>
+				<div class="select-buttons astro-skt2cqnz">
+					<a class="github-button astro-skt2cqnz" href="https://github.com/withastro/docs/issues/new" target="_blank" rel="noopener noreferrer">
+						<svg aria-hidden="true" class="astro-skt2cqnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 4;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg>
+						<h2 class="astro-skt2cqnz">
+							Crear un problema en GitHub
+						</h2>
+						<p class="astro-skt2cqnz">
+							La forma más rápida de alertar a nuestro equipo de un problema.
+						</p>
+					</a>
+					<button data-select-feedback class="astro-skt2cqnz">
+						<svg aria-hidden="true" class="astro-skt2cqnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 4;"><path d="M12 16a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm10.67 1.47-8.05-14a3 3 0 0 0-5.24 0l-8 14A3 3 0 0 0 3.94 22h16.12a3 3 0 0 0 2.61-4.53Zm-1.73 2a1 1 0 0 1-.88.51H3.94a1 1 0 0 1-.88-.51 1 1 0 0 1 0-1l8-14a1 1 0 0 1 1.78 0l8.05 14a1 1 0 0 1 .05 1.02v-.02ZM12 8a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1Z"/></svg>
+						<h2 class="astro-skt2cqnz">
+							Envíanos comentarios
+						</h2>
+						<p class="astro-skt2cqnz">
+							Envíanos un mensaje directamente.
+						</p>
+					</button>
+				</div>
+			</div>
+			<form hidden class="astro-skt2cqnz">
+				<button data-back-button class="astro-skt2cqnz">
+					<span class="sr-only astro-skt2cqnz">Cerrar formulario de opinión</span>
+					<svg aria-hidden="true" class="astro-skt2cqnz astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>
+				</button>
+				<h1 class="astro-skt2cqnz">Envíanos comentarios</h1>
+				<fieldset class="category-options astro-skt2cqnz">
+					<legend class="sr-only astro-skt2cqnz">Elige una categoría de opinión</legend>
+					<span class="category-option astro-skt2cqnz">
+								<input class="sr-only astro-skt2cqnz" id="issue1py8una" type="radio" name="category" value="issue" checked="true">
+								<label for="issue1py8una" class="astro-skt2cqnz">
+									<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" class="astro-skt2cqnz">
+										<path d="M12 16a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm10.67 1.47-8.05-14a3 3 0 0 0-5.24 0l-8 14A3 3 0 0 0 3.94 22h16.12a3 3 0 0 0 2.61-4.53Zm-1.73 2a1 1 0 0 1-.88.51H3.94a1 1 0 0 1-.88-.51 1 1 0 0 1 0-1l8-14a1 1 0 0 1 1.78 0l8.05 14a1 1 0 0 1 .05 1.02v-.02ZM12 8a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1Z" class="astro-skt2cqnz"></path>
+									</svg>
+									<span class="astro-skt2cqnz">
+										Problema
+									</span>
+								</label>
+							</span><span class="category-option astro-skt2cqnz">
+								<input class="sr-only astro-skt2cqnz" id="idea1py8una" type="radio" name="category" value="idea">
+								<label for="idea1py8una" class="astro-skt2cqnz">
+									<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" class="astro-skt2cqnz">
+										<path d="M17.09 2.82A8 8 0 0 0 5.86 14.13c.7.8 1.1 1.8 1.14 2.87v3a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-2.81c.03-1.17.46-2.3 1.22-3.19a8 8 0 0 0-1.13-11.2v.02ZM15 20a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1h6v1Zm1.67-7.24c-1 1.2-1.6 2.68-1.67 4.24h-2v-3a1 1 0 0 0-2 0v3H9a6.5 6.5 0 0 0-1.6-4.16 6 6 0 1 1 9.27-.08Z" class="astro-skt2cqnz"></path>
+									</svg>
+									<span class="astro-skt2cqnz">
+										Idea
+									</span>
+								</label>
+							</span><span class="category-option astro-skt2cqnz">
+								<input class="sr-only astro-skt2cqnz" id="other1py8una" type="radio" name="category" value="other">
+								<label for="other1py8una" class="astro-skt2cqnz">
+									<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" class="astro-skt2cqnz">
+										<path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" class="astro-skt2cqnz"></path>
+									</svg>
+									<span class="astro-skt2cqnz">
+										Otro
+									</span>
+								</label>
+							</span>
+				</fieldset>
+				<label for="textarea1py8una" class="sr-only astro-skt2cqnz">
+					Mensaje
+				</label>
+				<textarea id="textarea1py8una" name="text" cols="34" rows="3" required placeholder="¿Qué nos quieres decir?" class="astro-skt2cqnz"></textarea>
+				<button type="submit" class="astro-skt2cqnz">Enviar opinión</button>
+				<a href="https://astro.build/privacy/" style="text-decoration: underline; align-self: start; color: var(--sl-color-text-accent);" target="_blank" rel="noopener" class="astro-skt2cqnz">
+					Política de privacidad
+				</a>
+			</form>
+			<div class="success-pane astro-skt2cqnz" hidden tabindex="-1">
+				<img src="/_astro/houston-happy.fP8mBnGj.webp" alt="" width="128" height="128" class="astro-skt2cqnz">
+				<p class="astro-skt2cqnz">
+					¡Gracias! Hemos recibido tu opinión.
+				</p>
+			</div>
+		</div>
+	</dialog>
+</feedback-form>
+
+<script type="module">class p extends HTMLElement{constructor(){super();const n=this.querySelector("button[data-open-modal]"),h=this.querySelector("button[data-close-modal]"),b=this.querySelector("button[data-back-button]"),r=this.querySelector('button[type="submit"]'),i=this.querySelector("dialog"),f=this.querySelector(".dialog-frame"),m=this.querySelector("div.select-pane"),t=this.querySelector("form"),a=this.querySelector("div.success-pane"),d=this.querySelector("a.github-button"),y=this.querySelector("button[data-select-feedback]"),o=e=>{m.hidden=e!=="select",t.hidden=e!=="form",a.hidden=e!=="success",a.hidden||a.focus()},l=e=>{f.contains(e.target)||u()},k=e=>{o("select"),i.showModal(),t.querySelector("input:checked")?.focus(),e.stopPropagation(),window.addEventListener("click",l)},u=()=>{i.close(),window.removeEventListener("click",l)};n.addEventListener("click",k),h.addEventListener("click",u),b.addEventListener("click",()=>{o("select")}),d.addEventListener("click",()=>{const e=new URL("https://github.com/withastro/docs/issues/new"),s={issue:"⚠️ Issue",idea:"💡 Idea",other:"🐠 Feedback"};if(t.category.value in s){const c=s[t.category.value];e.searchParams.set("title",c)}t.text.value&&e.searchParams.set("body",t.text.value),d.href=e.href}),y.addEventListener("click",()=>{o("form")}),t.addEventListener("submit",async e=>{e.preventDefault(),r.disabled=!0;try{const s=await fetch("https://api.feedback.fish/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({projectId:"1b24b5d16c81bd",text:t.text.value,category:t.category.value,metadata:{url:location.pathname.replace(/\/$/,"")}})});if(!s.ok)throw new Error(s.statusText);const c=await s.json();if(c.error)throw new Error(c.error)}catch(s){console.error(`Error submitting feedback form
+`,s)}o("success"),r.disabled=!1,t.reset()}),n.disabled=!1}}customElements.define("feedback-form",p);</script>
+
+	<a href="https://community.astro.build" class="sl-flex astro-m2zh2vwj">
+		<svg aria-hidden="true" class="astro-m2zh2vwj astro-27agt67y" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M20.16 5A6.29 6.29 0 0 0 12 4.36a6.27 6.27 0 0 0-8.16 9.48l6.21 6.22a2.78 2.78 0 0 0 3.9 0l6.21-6.22a6.27 6.27 0 0 0 0-8.84m-1.41 7.46-6.21 6.21a.76.76 0 0 1-1.08 0l-6.21-6.24a4.29 4.29 0 0 1 0-6 4.27 4.27 0 0 1 6 0 1 1 0 0 0 1.42 0 4.27 4.27 0 0 1 6 0 4.29 4.29 0 0 1 .08 6Z"/></svg>
+		Comunidad
+	</a>
+</section>
+								</div>
+</div>
+							
+				</main>
+			</div>
+</div>
+		</div>
+</div>
+	</body></html>
